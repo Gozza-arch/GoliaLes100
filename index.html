@@ -3,808 +3,663 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>100 Films Cultes — Lolia éduque Gozza</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Tiempos+Headline:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Ma Liste de Films Cultes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-/* ─── RESET & BASE ─────────────────────────────────────────────── */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
 
 :root {
-    --bg:          #14181c;
-    --bg-2:        #1c2228;
-    --bg-3:        #242c36;
-    --bg-4:        #2c3440;
-    --surface:     #1c2228;
-    --border:      rgba(255,255,255,0.07);
-    --border-hover:rgba(255,255,255,0.14);
-    --text:        #c8d0da;
-    --text-dim:    #8a9db5;
-    --text-bright: #e8ecf0;
-    --green:       #00b020;
-    --green-dim:   #1a3a1f;
-    --orange:      #e9a84c;
-    --orange-dim:  #3a2a0c;
-    --red:         #c04040;
-    --red-dim:     #3a1414;
-    --accent:      #00b020;
-    --radius:      4px;
-    --radius-lg:   8px;
+    --primary: #6c63ff;
+    --primary-dark: #574fd6;
+    --green: #22c55e;
+    --orange: #f59e0b;
+    --red: #ef4444;
+    --dark: #0f172a;
+    --text: #334155;
+    --muted: #94a3b8;
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+    --transition: all 0.2s ease;
 }
 
-html { font-size: 15px; }
-
+* { margin:0; padding:0; box-sizing:border-box; }
 body {
-    font-family: 'DM Sans', -apple-system, sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
+    padding: 30px 20px;
     min-height: 100vh;
-    line-height: 1.5;
 }
 
-/* ─── HEADER ──────────────────────────────────────────────────── */
+.container {max-width: 1300px; margin: 0 auto;}
+
+/* ── HEADER ── */
 .site-header {
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 0 32px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(12px);
-}
-
-.header-inner {
-    max-width: 1400px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 24px;
-    height: 56px;
-}
-
-.logo-mark {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-.logo-circles {
-    display: flex;
-    gap: -4px;
-}
-
-.logo-circles span {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: -5px;
-}
-
-.logo-circles span:nth-child(1) { background: #ff8000; }
-.logo-circles span:nth-child(2) { background: #00c030; opacity: 0.85; }
-.logo-circles span:nth-child(3) { background: #40bcf4; opacity: 0.7; }
-
-.logo-text {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text-bright);
-    letter-spacing: -0.3px;
-}
-
-.logo-sub {
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding-left: 2px;
-}
-
-.header-sep { flex: 1; }
-
-.header-nav {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-}
-
-.nav-btn {
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 8px 12px;
-    border-radius: var(--radius);
-    font-size: 0.82rem;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.nav-btn:hover {
-    background: var(--bg-4);
-    border-color: var(--border-hover);
-}
-
-.nav-btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-}
-
-.nav-btn.primary:hover {
-    background: #00c830;
-    border-color: #00c830;
-}
-
-/* ─── SEARCH ───────────────────────────────────────────────────── */
-.search-wrap {
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 40px;
+    padding: 36px 40px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
     position: relative;
-    flex: 1;
-    max-width: 300px;
+    overflow: hidden;
 }
 
-.search-input {
-    width: 100%;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 8px 12px 8px 36px;
-    border-radius: var(--radius);
-    font-size: 0.85rem;
-    font-family: inherit;
-    transition: all 0.15s;
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: var(--border-hover);
-    background: var(--bg-4);
-}
-
-.search-wrap i {
+.site-header::before {
+    content: '';
     position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-dim);
-    font-size: 0.85rem;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: rgba(108,99,255,0.15);
+    border-radius: 50%;
 }
 
-.search-input::placeholder { color: var(--text-dim); font-weight: 300; }
+.site-header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 150px; height: 150px;
+    background: rgba(108,99,255,0.1);
+    border-radius: 50%;
+}
 
-.filter-select {
-    background: var(--bg-3);
+.site-titles h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+}
+
+.site-titles h2 {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.site-logo {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 3px solid rgba(255,255,255,0.25);
+    box-shadow: 0 0 0 6px rgba(108,99,255,0.25);
+    position: relative;
+    z-index: 1;
+}
+
+/* ── STATS ── */
+.stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+    flex: 1;
+    min-width: 130px;
+    text-align: center;
+    transition: var(--transition);
     border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ── CONTRÔLES ── */
+.controls-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.search-box {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    min-width: 280px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 11px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    background: white;
     color: var(--text);
-    padding: 8px 12px;
-    border-radius: var(--radius);
-    font-size: 0.82rem;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.15s;
-    appearance: none;
-    padding-right: 28px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238a9db5' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
 }
 
-.filter-select:focus {
+.search-box input:focus {
     outline: none;
-    border-color: var(--border-hover);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
 }
 
-.filter-select option { background: var(--bg-3); }
+.search-box input::placeholder {color: var(--muted);}
 
-.toolbar-spacer { flex: 1; }
+.actions-top {display: flex; gap: 8px;}
 
-.results-badge {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    padding: 6px 10px;
-    background: var(--bg-3);
+/* ── FILTRES ── */
+.filters-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.filters-row label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filters-row select {
+    padding: 9px 14px;
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
-    border: 1px solid var(--border);
-    white-space: nowrap;
+    font-size: 0.88rem;
+    font-family: 'Inter', sans-serif;
+    background: white;
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
 }
 
-/* ─── SUGGESTION BANNER ────────────────────────────────────────── */
-.suggestion-banner {
+.filters-row select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+}
+
+/* ── BOUTONS ── */
+.btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    transition: var(--transition);
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(108,99,255,0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108,99,255,0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--red), #dc2626);
+    box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+}
+
+.btn-danger:hover { box-shadow: 0 6px 20px rgba(239,68,68,0.4); }
+
+.btn-secondary {
+    background: linear-gradient(135deg, #64748b, #475569);
+    box-shadow: 0 2px 8px rgba(100,116,139,0.3);
+}
+
+.btn-secondary:hover { box-shadow: 0 6px 20px rgba(100,116,139,0.4); }
+
+/* ── SUGGESTION ── */
+.suggestion-message {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border-left: 4px solid var(--orange);
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    border-radius: var(--radius);
     display: none;
     align-items: center;
-    gap: 12px;
-    background: var(--orange-dim);
-    border: 1px solid rgba(233,168,76,0.25);
-    border-radius: var(--radius);
-    padding: 10px 14px;
-    margin-bottom: 12px;
-    font-size: 0.85rem;
-    color: var(--orange);
+    justify-content: space-between;
+    box-shadow: var(--shadow);
+    border: 1px solid #fde68a;
 }
 
-.suggestion-banner.show { display: flex; }
+.suggestion-message.show { display: flex; }
 
-.suggestion-banner .close-btn {
+#suggestion-text {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    color: #92400e;
+    font-weight: 500;
+}
+
+.close-suggestion {
     background: none;
     border: none;
-    color: var(--orange);
+    font-size: 1.4rem;
+    color: #d97706;
     cursor: pointer;
-    margin-left: auto;
-    opacity: 0.7;
-    font-size: 1rem;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.2s;
+    margin-left: 12px;
 }
 
-.suggestion-banner .close-btn:hover {
-    opacity: 1;
-    transform: scale(1.05);
-}
+.close-suggestion:hover { color: var(--red); }
 
-/* ─── TABLE ────────────────────────────────────────────────────── */
-.table-wrap {
-    border: 1px solid var(--border);
+/* ── TABLEAU ── */
+.table-container {
+    background: var(--card);
     border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--surface);
+    box-shadow: var(--shadow-md);
+    overflow-x: auto;
+    border: 1px solid var(--border);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 860px;
-}
+table { width: 100%; border-collapse: collapse; min-width: 900px; }
 
-thead tr {
-    background: var(--bg);
+th, td {
+    padding: 13px 15px;
+    text-align: left;
     border-bottom: 1px solid var(--border);
 }
 
 th {
-    padding: 10px 14px;
-    text-align: left;
-    font-size: 0.68rem;
+    background: #0f172a;
+    color: rgba(255,255,255,0.85);
     font-weight: 600;
+    font-size: 0.82rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-dim);
+    letter-spacing: 0.8px;
     white-space: nowrap;
     user-select: none;
 }
 
-th.sortable { cursor: pointer; }
-th.sortable:hover { color: var(--text-bright); }
+th:first-child { border-radius: 0; }
 
-th .sort-icon {
+tbody tr:hover { background: #f8fafc; }
+tbody tr:last-child td { border-bottom: none; }
+
+/* Alternance subtile */
+tbody tr:nth-child(even) { background: #fafafa; }
+tbody tr:nth-child(even):hover { background: #f1f5f9; }
+
+/* ── TRI ── */
+th.sortable { cursor: pointer; position: relative; padding-right: 26px; }
+th.sortable:hover { background: #1e293b; color: white; }
+th.sortable::after {
+    content: '\f0dc';
+    font-family: 'FontAwesome';
+    position: absolute;
+    right: 8px; top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4; font-size: 0.8rem;
+}
+th.sortable.asc::after  { content: '\f0de'; opacity: 1; color: var(--primary); }
+th.sortable.desc::after { content: '\f0dd'; opacity: 1; color: var(--primary); }
+
+/* ── PAYS ── */
+.country-display { font-size: 0.82rem; color: #64748b; white-space: nowrap; }
+.country-flag { font-size: 1rem; }
+
+/* ── STATUS ── */
+.status-badge {
     display: inline-block;
-    margin-left: 4px;
-    opacity: 0.3;
-    font-size: 0.6rem;
-    vertical-align: middle;
-}
-
-th.asc .sort-icon,
-th.desc .sort-icon { opacity: 1; color: var(--accent); }
-
-tbody tr {
-    border-bottom: 1px solid var(--border);
-    transition: background 0.1s;
-}
-
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--bg-3); }
-
-td {
-    padding: 10px 14px;
-    font-size: 0.85rem;
-    vertical-align: middle;
-}
-
-td:first-child { padding-left: 16px; }
-
-.status-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 8px;
-    border-radius: var(--radius);
+    padding: 5px 12px;
+    border-radius: 20px;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 700;
+    color: white;
+    min-width: 80px;
+    text-align: center;
     cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-}
-
-.status-pill.watched {
-    background: var(--green-dim);
-    color: var(--green);
-    border: 1px solid rgba(0,176,32,0.3);
-}
-
-.status-pill.rewatch {
-    background: var(--orange-dim);
-    color: var(--orange);
-    border: 1px solid rgba(233,168,76,0.3);
-}
-
-.status-pill.not-watched {
-    background: var(--bg-3);
-    color: var(--text-dim);
-    border: 1px solid var(--border);
-}
-
-.status-pill:hover {
-    filter: brightness(1.15);
-    transform: scale(1.03);
-}
-
-.status-pill i {
-    margin-left: 6px;
-    opacity: 0.8;
-}
-
-/* Stars */
-.stars-cell { display: flex; gap: 1px; align-items: center; }
-
-.star-btn {
-    background: none;
     border: none;
+    transition: var(--transition);
+    letter-spacing: 0.3px;
+}
+
+.status-badge:hover { opacity: 0.85; transform: scale(1.05); }
+.status-badge.watched     { background: linear-gradient(135deg, #22c55e, #16a34a); }
+.status-badge.not-watched { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.status-badge.rewatch     { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+/* ── ÉTOILES ── */
+.star-rating { display: inline-flex; gap: 2px; }
+.star-rating .star {
+    font-size: 1.05rem;
     cursor: pointer;
-    padding: 0 1px;
-    font-size: 0.9rem;
-    line-height: 1;
-    color: var(--bg-4);
     transition: color 0.1s, transform 0.1s;
+    color: #e2e8f0;
 }
+.star-rating .star.on { color: #f59e0b; }
+.star-rating .star:hover { transform: scale(1.3); }
 
-.star-btn.on { color: var(--orange); }
-.star-btn:hover { transform: scale(1.3); }
-
-/* Delete btn */
-.del-btn {
+/* ── CORBEILLE ── */
+.delete-btn {
     background: none;
     border: none;
-    color: var(--text-dim);
     cursor: pointer;
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius);
+    width: 32px; height: 32px;
+    border-radius: 8px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
-    transition: all 0.15s;
-    opacity: 0.4;
+    color: #cbd5e1;
+    font-size: 1rem;
+    transition: var(--transition);
 }
+.delete-btn:hover { color: white; background: var(--red); }
+td:last-child { text-align: center; }
 
-.del-btn:hover {
-    opacity: 1;
-    color: #fff;
-    background: var(--red);
-}
-
-.del-btn::before {
-    content: "\f2ed";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 0.9rem;
-}
-
-tbody tr:hover .del-btn { opacity: 0.6; }
-
-/* ─── MODAL ─────────────────────────────────────────────────────── */
+/* ── MODAL ── */
 .modal {
     display: none;
     position: fixed;
+    z-index: 200;
     inset: 0;
-    z-index: 500;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(6px);
+    background: rgba(15,23,42,0.6);
+    backdrop-filter: blur(4px);
     align-items: center;
     justify-content: center;
 }
-
 .modal.show { display: flex; }
 
-.modal-box {
-    background: var(--bg-3);
-    border: 1px solid var(--border);
+.modal-content {
+    background: white;
+    padding: 32px 36px;
     border-radius: var(--radius-lg);
-    padding: 24px;
-    max-width: 500px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 480px;
+    position: relative;
+    animation: modalIn 0.2s ease-out;
 }
 
-.modal-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--text-bright);
+@keyframes modalIn {
+    from { opacity:0; transform: scale(0.95) translateY(10px); }
+    to   { opacity:1; transform: scale(1) translateY(0); }
 }
 
-.form-field {
-    margin-bottom: 16px;
+.modal-content h2 {
+    margin-bottom: 22px;
+    color: var(--dark);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
 }
 
-.form-label {
+.modal-content h3 { margin-bottom: 8px; color: var(--dark); font-weight: 600; }
+.modal-content p  { color: var(--muted); margin-bottom: 4px; }
+
+.close-modal {
+    position: absolute;
+    right: 18px; top: 14px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--muted);
+    line-height: 1;
+    transition: var(--transition);
+}
+.close-modal:hover { color: var(--red); transform: rotate(90deg); }
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
     display: block;
     margin-bottom: 6px;
-    font-size: 0.85rem;
-    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--dark);
 }
 
-.form-input {
+.form-group input,
+.form-group select {
     width: 100%;
-    background: var(--bg-4);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 8px 12px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
-    font-size: 0.85rem;
-    font-family: inherit;
-    transition: all 0.15s;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    transition: var(--transition);
 }
 
-.form-input:focus {
+.form-group input:focus,
+.form-group select:focus {
     outline: none;
-    border-color: var(--accent);
-    background: var(--bg-4);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
 }
 
-.modal-actions {
+.modal-buttons {
     display: flex;
-    gap: 8px;
     justify-content: flex-end;
-    margin-top: 20px;
+    gap: 8px;
+    margin-top: 24px;
 }
 
-.btn-ghost {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    padding: 8px 16px;
-    border-radius: var(--radius);
+/* Badge résultats */
+.results-count {
     font-size: 0.82rem;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.15s;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding-left: 4px;
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 6px;
 }
 
-.btn-ghost:hover {
-    border-color: var(--border-hover);
-    color: var(--text-bright);
-}
-
-.btn-ghost i {
-    font-size: 0.9em;
-}
-
-.btn-confirm {
-    background: var(--accent);
-    border: none;
-    color: #fff;
-    padding: 8px 18px;
-    border-radius: var(--radius);
-    font-size: 0.82rem;
-    font-family: inherit;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.15s;
-}
-
-.btn-confirm:hover { background: #00c830; }
-
-.btn-danger {
-    background: var(--red);
-    border: none;
-    color: #fff;
-    padding: 8px 18px;
-    border-radius: var(--radius);
-    font-size: 0.82rem;
-    font-family: inherit;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.btn-danger:hover { background: #d44; }
-
-.btn-danger i {
-    font-size: 0.9em;
-}
-
-/* ─── EMPTY STATE ──────────────────────────────────────────────── */
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text-dim);
-}
-
-.empty-state i {
-    font-size: 2rem;
-    margin-bottom: 12px;
-    display: block;
-    opacity: 0.4;
-}
-
-.empty-state p {
-    font-size: 0.9rem;
-}
-
-/* ─── HERO ─────────────────────────────────────────────────────── */
-.hero {
-    background: linear-gradient(135deg, var(--bg-3) 0%, var(--bg-4) 100%);
-    padding: 40px 32px;
-    border-radius: var(--radius-lg);
-    margin-bottom: 24px;
-}
-
-.hero-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.hero-label {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-}
-
-.hero-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--text-bright);
-    line-height: 1.2;
-    margin-bottom: 16px;
-}
-
-.hero-title em {
-    font-style: italic;
-    color: var(--accent);
-}
-
-.hero-desc {
-    font-size: 1rem;
-    color: var(--text);
-    max-width: 600px;
-    margin: 0;
-}
-
-/* ─── STATS ────────────────────────────────────────────────────── */
-.stats-strip {
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    margin-bottom: 24px;
-}
-
-.stats-strip-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    gap: 24px;
-    padding: 12px 32px;
-}
-
-.stat-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.stat-num {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-bright);
-}
-
-.stat-num.green { color: var(--green); }
-.stat-num.orange { color: var(--orange); }
-
-.stat-lbl {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-}
-
-/* ─── MAIN ────────────────────────────────────────────────────── */
-.main-wrap {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 32px;
-}
-
-.toolbar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-}
-
-/* ─── GENRE TAGS ──────────────────────────────────────────────── */
-.genre-tag {
-    display: inline-block;
-    background: var(--bg-4);
-    color: var(--text);
-    padding: 2px 6px;
-    border-radius: var(--radius);
-    font-size: 0.75rem;
-    margin-right: 4px;
-    margin-bottom: 4px;
-    border: 1px solid var(--border);
-}
-
-/* ─── FILM DU JOUR ──────────────────────────────────────────────── */
-.film-du-jour {
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 16px;
-    margin-bottom: 24px;
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.film-du-jour.show {
-    display: block;
-}
-
+/* ── ANIMATIONS ── */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity:0; transform: translateY(6px); }
+    to   { opacity:1; transform: translateY(0); }
 }
+tbody tr { animation: fadeIn 0.15s ease-out; }
 
-.film-du-jour-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--text-bright);
-    margin-bottom: 8px;
-}
-
-.film-du-jour-meta {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-}
-
-.film-du-jour-meta span {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-/* Espacement des icônes dans les boutons */
-.nav-btn i, .close-btn i, .status-btn i, .btn-ghost i, .btn-danger i {
-    margin-right: 6px;
-    font-size: 0.9em;
-}
-
-/* Animation pour les icônes */
-.nav-btn:hover i, .close-btn:hover i, .btn-ghost:hover i, .btn-danger:hover i {
-    transform: scale(1.1);
-    transition: transform 0.2s;
-}
-
-/* Style pour les icônes de statut */
-.status-btn i {
-    margin-left: 6px;
-    opacity: 0.8;
-}
-
-/* Style pour les icônes de suppression */
-.del-btn {
-    transition: all 0.2s;
-}
-
-.del-btn:hover {
-    transform: scale(1.1);
-}
-
-/* ─── RESPONSIVE ───────────────────────────────────────────────── */
-@media (max-width: 768px) {
-    .site-header, .hero, .stats-strip, .main-wrap { padding-left: 16px; padding-right: 16px; }
-    .hero-title { font-size: 1.6rem; }
-    .table-wrap { overflow-x: auto; }
-}
-</style>
+    </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="#" class="logo-mark">
-                <img src="https://i.imgur.com/3QY7X5L.jpg" alt="Logo" width="40" height="40" style="border-radius: 50%;">
-                <div>
-                    <div class="logo-text">CinéList</div>
-                </div>
-            </a>
-            <div class="logo-sub">Lolia éduque Gozza</div>
-            <div class="header-sep"></div>
-            <div class="header-nav">
-                <button id="random-film-btn" class="nav-btn">
-                    <i class="fa-solid fa-film"></i> Film du jour
-                </button>
-                <button id="add-film-btn" class="nav-btn primary">
-                    <i class="fa-solid fa-plus"></i> Ajouter
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- FILM DU JOUR -->
-    <div id="film-du-jour" class="film-du-jour">
-        <h3 class="film-du-jour-title" id="film-du-jour-title">Titre du film</h3>
-        <div class="film-du-jour-meta">
-            <span><i class="fa-solid fa-calendar"></i> <span id="film-du-jour-year">1999</span></span>
-            <span><i class="fa-solid fa-film"></i> <span id="film-du-jour-genre">Genre</span></span>
-            <span><i class="fa-solid fa-globe"></i> <span id="film-du-jour-country">Pays</span></span>
-        </div>
+<div class="container">
+    <div class="site-header">
+    <img src="logo.webp" alt="Logo" class="site-logo">
+    <div class="site-titles">
+        <h1>🎬 100 Films Cultes</h1>
+        <h2>Lolia éduque Gozza</h2>
     </div>
-
-    <!-- HERO -->
-    <div class="hero">
-        <div class="hero-inner">
-            <div class="hero-label">Liste collaborative</div>
-            <h1 class="hero-title">100 films <em>cultes</em><br>à regarder</h1>
-            <p class="hero-desc">Une sélection soigneusement choisie de films incontournables. Marquez ce que vous avez vu, notez, et découvrez ensemble.</p>
-        </div>
-    </div>
+    <img src="logo.webp" alt="Logo" class="site-logo">
+</div>
 
     <!-- STATS -->
-    <div class="stats-strip">
-        <div class="stats-strip-inner">
-            <div class="stat-item">
-                <span class="stat-num" id="total-films">0</span>
-                <span class="stat-lbl">Films</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num green" id="watched-Gozza">0</span>
-                <span class="stat-lbl">Vus — Gozza</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num green" id="watched-Lolia">0</span>
-                <span class="stat-lbl">Vus — Lolia</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num orange" id="rewatch-count">0</span>
-                <span class="stat-lbl">À revoir</span>
-            </div>
+    <div class="stats">
+        <div class="stat-card">
+            <span class="stat-number" id="total-films">0</span>
+            <span class="stat-label">Films</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" id="watched-Gozza">0</span>
+            <span class="stat-label">Vu (Gozza)</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" id="watched-Lolia">0</span>
+            <span class="stat-label">Vu (Lolia)</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" id="rewatch-count">0</span>
+            <span class="stat-label">À revoir</span>
         </div>
     </div>
 
-    <!-- MAIN -->
-    <div class="main-wrap">
-        <!-- TOOLBAR -->
-        <div class="toolbar">
-            <div class="search-wrap">
-                <i class="fa fa-search"></i>
-                <input type="text" id="search" class="search-input" placeholder="Titre, genre…">
-            </div>
-            <select id="filter-country" class="filter-select">
-                <option value="">Tous pays</option>
+    <!-- CONTRÔLES HAUT -->
+    <div class="controls-top">
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Rechercher un film ou genre…">
+        </div>
+        <div class="actions-top">
+            <button id="random-film-btn" class="btn">🎲 Film aléatoire</button>
+            <button id="add-film-btn" class="btn">＋ Ajouter un film</button>
+        </div>
+    </div>
+
+    <!-- FILTRES -->
+    <div class="filters-row">
+        <label>Filtrer :</label>
+
+        <select id="filter-country">
+            <option value="">🌍 Tous les pays</option>
+            <option value="us">🇺🇸 États-Unis</option>
+            <option value="fr">🇫🇷 France</option>
+            <option value="jp">🇯🇵 Japon</option>
+            <option value="gb">🇬🇧 Royaume-Uni</option>
+            <option value="kr">🇰🇷 Corée</option>
+            <option value="ru">🇷🇺 Russie</option>
+            <option value="se">🇸🇪 Suède</option>
+            <option value="it">🇮🇹 Italie</option>
+            <option value="de">🇩🇪 Allemagne</option>
+        </select>
+
+        <select id="filter-genre">
+            <option value="">🎭 Tous les genres</option>
+        </select>
+
+        <select id="filter-decade">
+            <option value="">📅 Toutes les années</option>
+            <option value="1920">1920–1929</option>
+            <option value="1930">1930–1939</option>
+            <option value="1940">1940–1949</option>
+            <option value="1950">1950–1959</option>
+            <option value="1960">1960–1969</option>
+            <option value="1970">1970–1979</option>
+            <option value="1980">1980–1989</option>
+            <option value="1990">1990–1999</option>
+            <option value="2000">2000–2009</option>
+            <option value="2010">2010–2019</option>
+            <option value="2020">2020–2029</option>
+        </select>
+
+        <select id="filter-rating-Gozza">
+            <option value="">⭐ Note Gozza</option>
+            <option value="5">5 étoiles</option>
+            <option value="4">4+ étoiles</option>
+            <option value="3">3+ étoiles</option>
+            <option value="2">2+ étoiles</option>
+            <option value="1">1+ étoile</option>
+            <option value="0">Non noté</option>
+        </select>
+
+        <select id="filter-rating-Lolia">
+            <option value="">⭐ Note Lolia</option>
+            <option value="5">5 étoiles</option>
+            <option value="4">4+ étoiles</option>
+            <option value="3">3+ étoiles</option>
+            <option value="2">2+ étoiles</option>
+            <option value="1">1+ étoile</option>
+            <option value="0">Non noté</option>
+        </select>
+
+        <select id="filter-status">
+            <option value="">👁 Tous statuts</option>
+            <option value="pas-vu">Pas vu</option>
+            <option value="vu">Vu</option>
+            <option value="a-revoir">À revoir</option>
+        </select>
+
+        <button id="reset-filters-btn" class="btn btn-secondary" style="padding:8px 14px;font-size:0.85rem;">✕ Réinitialiser</button>
+    </div>
+
+    <!-- SUGGESTION -->
+    <div id="random-film-suggestion" class="suggestion-message">
+        <span id="suggestion-text"></span>
+        <button id="close-suggestion" class="close-suggestion">&times;</button>
+    </div>
+
+    <!-- RÉSULTATS -->
+    <div class="results-count" id="results-count"></div>
+
+    <!-- TABLEAU -->
+    <div class="table-container">
+        <table id="film-table">
+            <thead>
+                <tr>
+                    <th class="sortable" data-sort="title">Titre</th>
+                    <th class="sortable" data-sort="country">Pays</th>
+                    <th class="sortable" data-sort="year">Année</th>
+                    <th class="sortable" data-sort="genre">Genre</th>
+                    <th class="sortable" data-sort="GozzaStatus">Gozza</th>
+                    <th class="sortable" data-sort="ratingGozza">Note (G)</th>
+                    <th class="sortable" data-sort="LoliaStatus">Lolia</th>
+                    <th class="sortable" data-sort="ratingLolia">Note (L)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="film-list"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL AJOUT -->
+<div id="add-film-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" id="close-add-modal">&times;</button>
+        <h2>Ajouter un film</h2>
+        <div class="form-group">
+            <label>Titre *</label>
+            <input type="text" id="new-film-title" placeholder="Titre du film">
+        </div>
+        <div class="form-group">
+            <label>Pays</label>
+            <select id="new-film-country">
                 <option value="us">🇺🇸 États-Unis</option>
                 <option value="fr">🇫🇷 France</option>
                 <option value="jp">🇯🇵 Japon</option>
@@ -815,444 +670,443 @@ tbody tr:hover .del-btn { opacity: 0.6; }
                 <option value="it">🇮🇹 Italie</option>
                 <option value="de">🇩🇪 Allemagne</option>
             </select>
-
-            <select id="filter-genre" class="filter-select">
-                <option value="">Tous genres</option>
-            </select>
-
-            <select id="filter-decade" class="filter-select">
-                <option value="">Toutes années</option>
-                <option value="1920">1920s</option>
-                <option value="1930">1930s</option>
-                <option value="1940">1940s</option>
-                <option value="1950">1950s</option>
-                <option value="1960">1960s</option>
-                <option value="1970">1970s</option>
-                <option value="1980">1980s</option>
-                <option value="1990">1990s</option>
-                <option value="2000">2000s</option>
-                <option value="2010">2010s</option>
-                <option value="2020">2020s</option>
-            </select>
-            <select id="filter-status" class="filter-select">
-                <option value="">Tous statuts</option>
-                <option value="pas-vu">Pas vu</option>
-                <option value="vu">Vu</option>
-                <option value="a-revoir">À revoir</option>
-            </select>
-
-            <button id="reset-filters-btn" class="btn-ghost">
-                <i class="fa-solid fa-arrows-rotate"></i> Reset
-            </button>
-
-            <div class="toolbar-spacer"></div>
-            <div class="results-badge" id="results-count"></div>
         </div>
-
-        <!-- TABLE -->
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="sortable" data-sort="id">#</th>
-                        <th class="sortable" data-sort="title">Titre</th>
-                        <th class="sortable" data-sort="country">Pays</th>
-                        <th class="sortable" data-sort="year">Année</th>
-                        <th>Genres</th>
-                        <th>Gozza</th>
-                        <th>Note Gozza</th>
-                        <th>Lolia</th>
-                        <th>Note Lolia</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="film-list">
-                    <!-- Films seront ajoutés ici -->
-                </tbody>
-            </table>
+        <div class="form-group">
+            <label>Année *</label>
+            <input type="number" id="new-film-year" min="1900" max="2099" value="2000">
+        </div>
+        <div class="form-group">
+            <label>Genre</label>
+            <input type="text" id="new-film-genre" placeholder="ex : Drame, Thriller…">
+        </div>
+        <div class="modal-buttons">
+            <button id="cancel-add" class="btn btn-secondary">Annuler</button>
+            <button id="confirm-add" class="btn">Ajouter</button>
         </div>
     </div>
+</div>
 
-    <!-- MODALS -->
-    <div id="add-film-modal" class="modal">
-        <div class="modal-box">
-            <h3 class="modal-title">Ajouter un film</h3>
-            <div class="form-field">
-                <label class="form-label" for="new-film-title">Titre</label>
-                <input type="text" id="new-film-title" class="form-input" placeholder="Titre du film">
-            </div>
-            <div class="form-field">
-                <label class="form-label" for="new-film-country">Pays</label>
-                <input type="text" id="new-film-country" class="form-input" placeholder="Code pays (ex: us, fr, jp)">
-            </div>
-            <div class="form-field">
-                <label class="form-label" for="new-film-year">Année</label>
-                <input type="number" id="new-film-year" class="form-input" placeholder="Année">
-            </div>
-            <div class="form-field">
-                <label class="form-label" for="new-film-genre">Genre</label>
-                <input type="text" id="new-film-genre" class="form-input" placeholder="Genre (ex: Drame, Science-fiction)">
-            </div>
-            <div class="modal-actions">
-                <button id="close-add-modal" class="btn-ghost">
-                    <i class="fa-solid fa-xmark"></i> Annuler
-                </button>
-                <button id="confirm-add" class="btn-confirm">
-                    <i class="fa-solid fa-check"></i> Ajouter
-                </button>
-            </div>
+<!-- MODAL SUPPRESSION -->
+<div id="confirm-modal" class="modal">
+    <div class="modal-content" style="max-width:380px;">
+        <h3>Supprimer ce film ?</h3>
+        <p style="margin-top:8px;color:#666;">Cette action est irréversible.</p>
+        <div class="modal-buttons">
+            <button id="cancel-delete" class="btn btn-secondary">Annuler</button>
+            <button id="confirm-delete" class="btn btn-danger">Supprimer</button>
         </div>
     </div>
+</div>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, setDoc, deleteDoc, doc, onSnapshot 
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    <div id="confirm-modal" class="modal">
-        <div class="modal-box">
-            <h3 class="modal-title">Supprimer le film</h3>
-            <p>Êtes-vous sûr de vouloir supprimer ce film ?</p>
-            <div class="modal-actions">
-                <button id="cancel-delete" class="btn-ghost">
-                    <i class="fa-solid fa-xmark"></i> Annuler
+  const firebaseConfig = {
+    apiKey: "AIzaSyB6CCGHq96B6AH2r3Xv3ap8L945axfEEIg",
+    authDomain: "golia-669a0.firebaseapp.com",
+    projectId: "golia-669a0",
+    storageBucket: "golia-669a0.firebasestorage.app",
+    messagingSenderId: "1035355765763",
+    appId: "1:1035355765763:web:a12483699dd05e8e34a236"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+  const filmsCol = collection(db, "films");
+
+  window.saveFilmToDb = async (film) => {
+    await setDoc(doc(db, "films", String(film.id)), film);
+  };
+
+  window.deleteFilmFromDb = async (id) => {
+    await deleteDoc(doc(db, "films", String(id)));
+  };
+
+  // ✅ onSnapshot propre, sans doublon
+  onSnapshot(filmsCol, (snapshot) => {
+    if (!snapshot.empty) {
+      films = snapshot.docs.map(d => d.data());
+      nextId = Math.max(...films.map(f => f.id)) + 1;
+      render();
+      updateStats();
+    }
+  });
+</script>
+
+
+<script>
+// ── DONNÉES ──────────────────────────────────────────────────────────────────
+let films = [
+      { id:1,  title:"Le Parrain",                        country:"us",    year:1972, genre:"Drame/Crime",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:2,  title:"Taxi Driver",                       country:"us",    year:1976, genre:"Drame/Thriller",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:3,  title:"Apocalypse Now",                    country:"us",    year:1979, genre:"Guerre/Drame",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:4,  title:"Le Voyage de Chihiro",              country:"jp",    year:2001, genre:"Animation/Fantastique", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:5,  title:"Le Dernier Tango à Paris",          country:"fr-it", year:1972, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:6,  title:"La Nuit américaine",                country:"fr",    year:1973, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:7,  title:"Star Wars : Épisode IV",            country:"us",    year:1977, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:8,  title:"Alien, le huitième passager",       country:"gb-us", year:1979, genre:"Horreur/SF",            GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:9,  title:"Cris et chuchotements",             country:"se",    year:1972, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:10, title:"Le Miroir",                         country:"ru",    year:1975, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:11, title:"Barry Lyndon",                      country:"gb-us", year:1975, genre:"Drame historique",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:12, title:"Les Dents de la mer",               country:"us",    year:1975, genre:"Thriller/Horreur",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:13, title:"Stalker",                           country:"ru",    year:1979, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:14, title:"Le Samouraï",                       country:"fr-it", year:1967, genre:"Policier",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:15, title:"Eraserhead",                        country:"us",    year:1977, genre:"Horreur/Surréaliste",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:16, title:"Blade Runner",                      country:"us",    year:1982, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:17, title:"2001 : L'Odyssée de l'espace",      country:"us",    year:1968, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:18, title:"Orange mécanique",                  country:"gb",    year:1971, genre:"Drame/SF",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:19, title:"Shining",                           country:"gb",    year:1980, genre:"Horreur",               GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:20, title:"Mulholland Drive",                  country:"us",    year:2001, genre:"Thriller/Mystère",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:21, title:"Parasite",                          country:"kr",    year:2019, genre:"Thriller",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:22, title:"Oldboy",                            country:"kr",    year:2003, genre:"Thriller",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:23, title:"Metropolis",                        country:"de",    year:1927, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:24, title:"Les 400 coups",                     country:"fr",    year:1959, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:25, title:"Rashōmon",                          country:"jp",    year:1950, genre:"Drame/Crime",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:26, title:"Pulp Fiction",                      country:"us",    year:1994, genre:"Crime",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:27, title:"Fight Club",                        country:"us",    year:1999, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:28, title:"The Dark Knight",                   country:"us",    year:2008, genre:"Action/Thriller",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:29, title:"Inception",                         country:"us",    year:2010, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:30, title:"Matrix",                            country:"us",    year:1999, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:31, title:"Forrest Gump",                      country:"us",    year:1994, genre:"Drame/Comédie",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:32, title:"Les Évadés",                        country:"us",    year:1994, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:33, title:"Le Parrain II",                     country:"us",    year:1974, genre:"Drame/Crime",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:34, title:"12 Hommes en colère",               country:"us",    year:1957, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:35, title:"La Liste de Schindler",             country:"us",    year:1993, genre:"Drame/Historique",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:36, title:"Le Seigneur des Anneaux : Le Retour du Roi", country:"nz-us", year:2003, genre:"Fantastique/Aventure", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:37, title:"Les Affranchis",                    country:"us",    year:1990, genre:"Crime/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:38, title:"Le Silence des Agneaux",            country:"us",    year:1991, genre:"Thriller/Horreur",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:39, title:"Seven",                             country:"us",    year:1995, genre:"Thriller/Policier",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:40, title:"Usual Suspects",                    country:"us",    year:1995, genre:"Thriller",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:41, title:"La Cité de Dieu",                   country:"br",    year:2002, genre:"Crime/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:42, title:"Le Pianiste",                       country:"pl-fr", year:2002, genre:"Drame/Historique",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:43, title:"Le Voyage de Chihiro",              country:"jp",    year:2001, genre:"Animation/Fantastique", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:44, title:"La Vie est belle",                  country:"it",    year:1997, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:45, title:"The Big Lebowski",                  country:"us",    year:1998, genre:"Comédie/Noir",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:46, title:"Trainspotting",                     country:"gb",    year:1996, genre:"Drame/Comédie noire",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:47, title:"Le Dîner de cons",                  country:"fr",    year:1998, genre:"Comédie",               GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:48, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",  year:2001, genre:"Comédie/Romantique",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:49, title:"La Haine",                          country:"fr",    year:1995, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:50, title:"Intouchables",                      country:"fr",    year:2011, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+	{ id:51,  title:"The Social Network",                    country:"us",    year:2010, genre:"Drame/Biographique",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:52,  title:"Whiplash",                              country:"us",    year:2014, genre:"Drame",                   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:53,  title:"La La Land",                            country:"us",    year:2016, genre:"Comédie musicale",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:54,  title:"The Grand Budapest Hotel",              country:"us",    year:2014, genre:"Comédie",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:55,  title:"Mad Max : Fury Road",                   country:"au",    year:2015, genre:"Action/SF",               GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:56,  title:"Premier Contact",                       country:"us",    year:2016, genre:"Science-fiction",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:57,  title:"Get Out",                               country:"us",    year:2017, genre:"Horreur/Thriller",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:58,  title:"La Forme de l'eau",                     country:"us",    year:2017, genre:"Fantastique/Romance",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:59,  title:"Joker",                                 country:"us",    year:2019, genre:"Drame/Thriller",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:60,  title:"Once Upon a Time in Hollywood",         country:"us",    year:2019, genre:"Comédie/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:61,  title:"1917",                                  country:"gb",    year:2019, genre:"Guerre/Drame",            GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:62,  title:"Dune",                                  country:"us",    year:2021, genre:"Science-fiction",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:63,  title:"Everything Everywhere All at Once",     country:"us",    year:2022, genre:"Science-fiction/Action",  GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:64,  title:"The Truman Show",                       country:"us",    year:1998, genre:"Comédie/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:65,  title:"Eternal Sunshine of the Spotless Mind", country:"us",    year:2004, genre:"Science-fiction/Romance", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:66,  title:"Requiem for a Dream",                   country:"us",    year:2000, genre:"Drame",                   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:67,  title:"Donnie Darko",                          country:"us",    year:2001, genre:"Science-fiction/Thriller",GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:68,  title:"Memento",                               country:"us",    year:2000, genre:"Thriller/Mystère",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:69,  title:"Le Prestige",                           country:"us",    year:2006, genre:"Thriller/Mystère",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:70,  title:"Interstellar",                          country:"us",    year:2014, genre:"Science-fiction",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:71,  title:"The Revenant",                          country:"us",    year:2015, genre:"Aventure/Drame",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:72,  title:"Birdman",                               country:"us",    year:2014, genre:"Comédie/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:73,  title:"Le Loup de Wall Street",                country:"us",    year:2013, genre:"Comédie/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:74,  title:"Django Unchained",                      country:"us",    year:2012, genre:"Western",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:75,  title:"Inglourious Basterds",                  country:"us",    year:2009, genre:"Guerre",                  GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:76,  title:"No Country for Old Men",                country:"us",    year:2007, genre:"Thriller",                GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:77,  title:"There Will Be Blood",                   country:"us",    year:2007, genre:"Drame",                   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:78,  title:"Les Fils de l'homme",                   country:"gb",    year:2006, genre:"Science-fiction",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:79,  title:"Les Infiltrés",                         country:"us",    year:2006, genre:"Thriller/Crime",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:80,  title:"Perdus dans la traduction",             country:"us",    year:2003, genre:"Comédie/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:81,  title:"La Famille Tenenbaum",                  country:"us",    year:2001, genre:"Comédie/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:82,  title:"American Beauty",                       country:"us",    year:1999, genre:"Drame",                   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:83,  title:"Fargo",                                 country:"us",    year:1996, genre:"Thriller/Comédie noire",  GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:84,  title:"Le Sixième Sens",                       country:"us",    year:1999, genre:"Thriller/Horreur",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:85,  title:"La Ligne verte",                        country:"us",    year:1999, genre:"Drame/Fantastique",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:86,  title:"Il faut sauver le soldat Ryan",         country:"us",    year:1998, genre:"Guerre/Drame",            GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:87,  title:"Le Roi Lion",                           country:"us",    year:1994, genre:"Animation/Aventure",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:88,  title:"Toy Story",                             country:"us",    year:1995, genre:"Animation/Aventure",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:89,  title:"Terminator",                            country:"us",    year:1984, genre:"Science-fiction",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:90,  title:"Retour vers le futur",                  country:"us",    year:1985, genre:"Science-fiction/Comédie", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:91,  title:"Die Hard",                              country:"us",    year:1988, genre:"Action/Thriller",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:92,  title:"Princess Bride",                        country:"us",    year:1987, genre:"Aventure/Comédie",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:93,  title:"This Is Spinal Tap",                    country:"us",    year:1984, genre:"Comédie/Musical",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:94,  title:"The Breakfast Club",                    country:"us",    year:1985, genre:"Comédie/Drame",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:95,  title:"La Folle Journée de Ferris Bueller",    country:"us",    year:1986, genre:"Comédie",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:96,  title:"S.O.S. Fantômes",                       country:"us",    year:1984, genre:"Comédie/SF",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:97,  title:"Les Goonies",                           country:"us",    year:1985, genre:"Aventure/Comédie",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:98,  title:"Stand by Me",                           country:"us",    year:1986, genre:"Drame/Aventure",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:99,  title:"Cinema Paradiso",                       country:"it",    year:1988, genre:"Drame/Romantique",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:100, title:"Titanic",                               country:"us",    year:1997, genre:"Drame/Romantique",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+];
+let sortKey = null, sortDir = 'asc', filmToDelete = null;
+let nextId = Math.max(...films.map(f=>f.id)) + 1;
+
+// ── PAYS : code → émoji ──────────────────────────────────────────────────────
+const FLAGS = {
+    us:'🇺🇸', fr:'🇫🇷', jp:'🇯🇵', gb:'🇬🇧',
+    kr:'🇰🇷', ru:'🇷🇺', se:'🇸🇪', it:'🇮🇹', de:'🇩🇪'
+};
+
+function formatCountry(country) {
+    // Supporte "us", "fr-it", "gb-us", etc.
+    const parts = country.split('-');
+    const flags  = parts.map(c => FLAGS[c] || c.toUpperCase()).join('/');
+    const labels = parts.map(c => c.toUpperCase()).join('/');
+    return `<span class="country-display" title="${labels}">${flags}</span>`;
+}
+
+// ── STATUS ───────────────────────────────────────────────────────────────────
+const STATUS_LABEL = { 'vu':'Vu', 'a-revoir':'À revoir', 'pas-vu':'Pas vu' };
+const STATUS_CLASS = { 'vu':'watched', 'a-revoir':'rewatch', 'pas-vu':'not-watched' };
+
+function toggleStatus(filmId, person) {
+    const film = films.find(f=>f.id===filmId); if(!film) return;
+    const key = person==='Gozza' ? 'GozzaStatus' : 'LoliaStatus';
+    const rk  = person==='Gozza' ? 'ratingGozza' : 'ratingLolia';
+    if (film[key]==='pas-vu') { film[key]='vu'; if(!film[rk]) film[rk]=1; }
+    else if (film[key]==='vu')  { film[key]='a-revoir'; }
+    else { film[key]='pas-vu'; film[rk]=0; }
+    save(); render(); updateStats();
+}
+
+// ── NOTES ÉTOILES ────────────────────────────────────────────────────────────
+function setRating(filmId, person, rating) {
+    const film = films.find(f=>f.id===filmId); if(!film) return;
+    const key = person==='Gozza' ? 'ratingGozza' : 'ratingLolia';
+    // Clic sur la même étoile = retirer la note
+    film[key] = (film[key]===rating) ? 0 : rating;
+    save(); render();
+}
+
+function renderStars(filmId, person, rating) {
+    return [1,2,3,4,5].map(i => {
+        const on = i <= rating ? 'on' : '';
+        return `<span class="star ${on}"
+            onclick="setRating(${filmId},'${person}',${i})"
+            onmouseover="previewStars(this,${i})"
+            onmouseout="resetStars(this,${rating})">★</span>`;
+    }).join('');
+}
+
+function previewStars(el, n) {
+    const stars = el.parentElement.querySelectorAll('.star');
+    stars.forEach((s,i) => s.style.color = i<n ? '#f1c40f' : '#ddd');
+}
+function resetStars(el, rating) {
+    const stars = el.parentElement.querySelectorAll('.star');
+    stars.forEach((s,i) => s.style.color = i<rating ? '#f1c40f' : '#ddd');
+}
+
+// ── GENRE FILTER DYNAMIC ─────────────────────────────────────────────────────
+function buildGenreFilter() {
+    const genres = new Set();
+    films.forEach(f => {
+        if (f.genre) f.genre.split('/').forEach(g => genres.add(g.trim()));
+    });
+    const sel = document.getElementById('filter-genre');
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">🎭 Tous les genres</option>';
+    [...genres].sort().forEach(g => {
+        const o = document.createElement('option');
+        o.value = g; o.textContent = g;
+        sel.appendChild(o);
+    });
+    sel.value = cur;
+}
+
+// ── RENDU ────────────────────────────────────────────────────────────────────
+function render() {
+    const search        = document.getElementById('search').value.toLowerCase();
+    const filterCountry = document.getElementById('filter-country').value;
+    const filterGenre   = document.getElementById('filter-genre').value;
+    const filterDecade  = document.getElementById('filter-decade').value;
+    const filterRatingM = document.getElementById('filter-rating-Gozza').value;
+    const filterRatingS = document.getElementById('filter-rating-Lolia').value;
+    const filterStatus  = document.getElementById('filter-status').value;
+
+    let list = films.filter(f => {
+        if (search && !f.title.toLowerCase().includes(search) && !(f.genre||'').toLowerCase().includes(search)) return false;
+        if (filterCountry && !f.country.split('-').includes(filterCountry)) return false;
+        if (filterGenre && !(f.genre||'').split('/').map(g=>g.trim()).includes(filterGenre)) return false;
+        if (filterDecade) {
+            const dec = parseInt(filterDecade);
+            if (f.year < dec || f.year >= dec+10) return false;
+        }
+        if (filterRatingM !== '') {
+            const v = parseInt(filterRatingM);
+            if (v === 0 && f.ratingGozza !== 0) return false;
+            if (v > 0  && f.ratingGozza < v)    return false;
+        }
+        if (filterRatingS !== '') {
+            const v = parseInt(filterRatingS);
+            if (v === 0 && f.ratingLolia !== 0) return false;
+            if (v > 0  && f.ratingLolia < v)    return false;
+        }
+        if (filterStatus && f.GozzaStatus !== filterStatus && f.LoliaStatus !== filterStatus) return false;
+        return true;
+    });
+
+    if (sortKey) {
+        list.sort((a,b) => {
+            let va = a[sortKey], vb = b[sortKey];
+            if (typeof va === 'string') { va=va.toLowerCase(); vb=vb.toLowerCase(); }
+            return sortDir==='asc' ? (va<vb?-1:va>vb?1:0) : (va>vb?-1:va<vb?1:0);
+        });
+    }
+
+    const tbody = document.getElementById('film-list');
+    tbody.innerHTML = '';
+
+    document.getElementById('results-count').textContent =
+        list.length === films.length
+            ? `${films.length} films`
+            : `${list.length} film${list.length!==1?'s':''} affiché${list.length!==1?'s':''} sur ${films.length}`;
+
+    list.forEach(film => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${film.title}</td>
+            <td>${formatCountry(film.country)}</td>
+            <td>${film.year}</td>
+            <td>${film.genre||''}</td>
+            <td style="text-align:center">
+                <button class="status-badge ${STATUS_CLASS[film.GozzaStatus]}"
+                        onclick="toggleStatus(${film.id},'Gozza')">
+                    ${STATUS_LABEL[film.GozzaStatus]}
                 </button>
-                <button id="confirm-delete" class="btn-danger">
-                    <i class="fa-solid fa-trash"></i> Supprimer
+            </td>
+            <td style="text-align:center">
+                <span class="star-rating">${renderStars(film.id,'Gozza',film.ratingGozza)}</span>
+            </td>
+            <td style="text-align:center">
+                <button class="status-badge ${STATUS_CLASS[film.LoliaStatus]}"
+                        onclick="toggleStatus(${film.id},'Lolia')">
+                    ${STATUS_LABEL[film.LoliaStatus]}
                 </button>
-            </div>
-        </div>
-    </div>
+            </td>
+            <td style="text-align:center">
+                <span class="star-rating">${renderStars(film.id,'Lolia',film.ratingLolia)}</span>
+            </td>
+            <td>
+                <button class="delete-btn" onclick="confirmDelete(${film.id})" title="Supprimer">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
 
-    <script>
-    // Données initiales
-    let films = [
-        { id:1,  title:"Le Parrain",                        country:"us",    year:1972, genre:"Drame/Crime",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:2,  title:"Taxi Driver",                       country:"us",    year:1976, genre:"Drame/Thriller",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:3,  title:"Apocalypse Now",                    country:"us",    year:1979, genre:"Guerre/Drame",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:4,  title:"Le Voyage de Chihiro",              country:"jp",    year:2001, genre:"Animation/Fantastique", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:5,  title:"Le Dernier Tango à Paris",          country:"fr",    year:1972, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:6,  title:"La Nuit américaine",                country:"fr",    year:1973, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:7,  title:"Star Wars : Épisode IV",            country:"us",    year:1977, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:8,  title:"Alien, le huitième passager",       country:"gb",    year:1979, genre:"Science-fiction/Horreur",GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:9,  title:"Blade Runner",                      country:"us",    year:1982, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:10, title:"Le Sacrifice",                      country:"se",    year:1986, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:11, title:"Le Mépris",                         country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:12, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:13, title:"American Beauty",                    country:"us",    year:1999, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:14, title:"Fargo",                             country:"us",    year:1996, genre:"Thriller/Comédie noire",GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:15, title:"Le Sixième Sens",                    country:"us",    year:1999, genre:"Thriller/Horreur",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:16, title:"La Ligne verte",                    country:"us",    year:1999, genre:"Drame/Fantastique",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:17, title:"Il faut sauver le soldat Ryan",     country:"us",    year:1998, genre:"Guerre/Drame",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:18, title:"Le Roi Lion",                        country:"us",    year:1994, genre:"Animation/Aventure",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:19, title:"Toy Story",                          country:"us",    year:1995, genre:"Animation/Aventure",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:20, title:"Terminator",                         country:"us",    year:1984, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:21, title:"Matrix",                             country:"us",    year:1999, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:22, title:"Le Silence des Agneaux",            country:"us",    year:1991, genre:"Thriller/Horreur",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:23, title:"Fight Club",                         country:"us",    year:1999, genre:"Drame/Thriller",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:24, title:"Le Pianiste",                        country:"fr",    year:2002, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:25, title:"Le Grand Bleu",                      country:"fr",    year:1988, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:26, title:"Le Cercle des Poètes Disparus",      country:"us",    year:1989, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:27, title:"Forrest Gump",                        country:"us",    year:1994, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:28, title:"Le Diable s'habille en Prada",        country:"us",    year:2006, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:29, title:"Les Goonies",                        country:"us",    year:1985, genre:"Aventure/Comédie",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:30, title:"Stand by Me",                        country:"us",    year:1986, genre:"Drame/Aventure",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:31, title:"Cinema Paradiso",                    country:"it",    year:1988, genre:"Drame/Romantique",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:32, title:"Titanic",                            country:"us",    year:1997, genre:"Drame/Romantique",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 }
-    ];
+    buildGenreFilter();
+}
 
-    let sortKey = null, sortDir = 'asc', filmToDelete = null;
-    let nextId = Math.max(...films.map(f=>f.id)) + 1;
+// ── STATS ────────────────────────────────────────────────────────────────────
+function updateStats() {
+    document.getElementById('total-films').textContent     = films.length;
+    document.getElementById('watched-Gozza').textContent  = films.filter(f=>f.GozzaStatus==='vu').length;
+    document.getElementById('watched-Lolia').textContent = films.filter(f=>f.LoliaStatus==='vu').length;
+    document.getElementById('rewatch-count').textContent   = films.filter(f=>f.GozzaStatus==='a-revoir'||f.LoliaStatus==='a-revoir').length;
+}
 
-    const FLAGS = {
-        us:'🇺🇸', fr:'🇫🇷', jp:'🇯🇵', gb:'🇬🇧',
-        kr:'🇰🇷', ru:'🇷🇺', se:'🇸🇪', it:'🇮🇹', de:'🇩🇪',
-        br:'🇧🇷', au:'🇦🇺', pl:'🇵🇱', nz:'🇳🇿'
+// ── TRI ──────────────────────────────────────────────────────────────────────
+document.querySelectorAll('th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+        const key = th.dataset.sort;
+        sortDir = (sortKey===key && sortDir==='asc') ? 'desc' : 'asc';
+        sortKey = key;
+        document.querySelectorAll('th.sortable').forEach(t=>t.classList.remove('asc','desc'));
+        th.classList.add(sortDir);
+        render();
+    });
+});
+
+// ── FILTRES ──────────────────────────────────────────────────────────────────
+['search','filter-country','filter-genre','filter-decade','filter-rating-Gozza','filter-rating-Lolia','filter-status']
+    .forEach(id => document.getElementById(id).addEventListener('input', render));
+['filter-country','filter-genre','filter-decade','filter-rating-Gozza','filter-rating-Lolia','filter-status']
+    .forEach(id => document.getElementById(id).addEventListener('change', render));
+
+document.getElementById('reset-filters-btn').addEventListener('click', () => {
+    document.getElementById('search').value = '';
+    ['filter-country','filter-genre','filter-decade','filter-rating-Gozza','filter-rating-Lolia','filter-status']
+        .forEach(id => { document.getElementById(id).value = ''; });
+    render();
+});
+
+// ── FILM ALÉATOIRE ───────────────────────────────────────────────────────────
+document.getElementById('random-film-btn').addEventListener('click', () => {
+    const pool = films.filter(f=>f.GozzaStatus==='pas-vu'||f.LoliaStatus==='pas-vu');
+    const pick = (pool.length ? pool : films)[Math.floor(Math.random()*(pool.length||films.length))];
+    document.getElementById('suggestion-text').textContent =
+        `🎲 Film suggéré : ${pick.title} (${pick.year})${pick.genre ? ' — '+pick.genre : ''}`;
+    document.getElementById('random-film-suggestion').classList.add('show');
+});
+document.getElementById('close-suggestion').addEventListener('click', () =>
+    document.getElementById('random-film-suggestion').classList.remove('show'));
+
+// ── AJOUT ────────────────────────────────────────────────────────────────────
+document.getElementById('add-film-btn').addEventListener('click', () =>
+    document.getElementById('add-film-modal').classList.add('show'));
+
+['close-add-modal','cancel-add'].forEach(id =>
+    document.getElementById(id).addEventListener('click', () =>
+        document.getElementById('add-film-modal').classList.remove('show')));
+
+document.getElementById('confirm-add').addEventListener('click', () => {
+    const title   = document.getElementById('new-film-title').value.trim();
+    const country = document.getElementById('new-film-country').value;
+    const year    = parseInt(document.getElementById('new-film-year').value);
+    const genre   = document.getElementById('new-film-genre').value.trim();
+    if (!title || !year) { alert('Le titre et l\'année sont requis.'); return; }
+    
+    const newFilm = { 
+        id: nextId++, title, country, year, 
+        genre: genre||'Non défini',
+        GozzaStatus:'pas-vu', LoliaStatus:'pas-vu', 
+        ratingGozza:0, ratingLolia:0 
     };
+    // ✅ Firebase uniquement, onSnapshot met à jour automatiquement
+    if (window.saveFilmToDb) window.saveFilmToDb(newFilm);
+    
+    document.getElementById('new-film-title').value = '';
+    document.getElementById('new-film-genre').value = '';
+    document.getElementById('add-film-modal').classList.remove('show');
+});
 
-    function formatFlag(country) {
-        return country.split('-').map(c => FLAGS[c] || c.toUpperCase()).join(' ');
+
+// ── SUPPRESSION ──────────────────────────────────────────────────────────────
+function confirmDelete(id) {
+    filmToDelete = id;
+    document.getElementById('confirm-modal').classList.add('show');
+}
+document.getElementById('confirm-delete').addEventListener('click', () => {
+    if (filmToDelete!==null) {
+        if (window.deleteFilmFromDb) window.deleteFilmFromDb(filmToDelete);
+        films = films.filter(f=>f.id!==filmToDelete);
+        filmToDelete=null; render(); updateStats();
     }
+    document.getElementById('confirm-modal').classList.remove('show');
+});
+document.getElementById('cancel-delete').addEventListener('click', () => {
+    filmToDelete=null;
+    document.getElementById('confirm-modal').classList.remove('show');
+});
 
-    const STATUS_LABEL = { 'vu':'Vu ✓', 'a-revoir':'À revoir', 'pas-vu':'Pas vu' };
-    const STATUS_CLASS = { 'vu':'watched', 'a-revoir':'rewatch', 'pas-vu':'not-watched' };
-    const STATUS_ICON = { 'vu':'<i class="fa-solid fa-check"></i>', 'a-revoir':'<i class="fa-solid fa-redo"></i>', 'pas-vu':'' };
+// ── SAUVEGARDE ───────────────────────────────────────────────────────────────
+function save() {
+  // Sauvegarde chaque film modifié dans Firebase
+  films.forEach(film => {
+    if (window.saveFilmToDb) window.saveFilmToDb(film);
+  });
+}
+	function load() {
+  // Le chargement est maintenant géré par onSnapshot Firebase
+  // On garde les films par défaut si Firebase n'est pas encore chargé
+}
+// ✅ Supprimer le setTimeout complètement
+load(); render(); updateStats();
+// ← FIN, rien d'autre
 
-    function toggleStatus(filmId, person) {
-        const film = films.find(f=>f.id===filmId); if(!film) return;
-        const key = person==='Gozza' ? 'GozzaStatus' : 'LoliaStatus';
-        const rk  = person==='Gozza' ? 'ratingGozza' : 'ratingLolia';
-        if (film[key]==='pas-vu') { film[key]='vu'; if(!film[rk]) film[rk]=1; }
-        else if (film[key]==='vu') { film[key]='a-revoir'; }
-        else { film[key]='pas-vu'; film[rk]=0; }
-        save(); render(); updateStats();
-    }
-
-    function setRating(filmId, person, rating) {
-        const film = films.find(f=>f.id===filmId); if(!film) return;
-        const key = person==='Gozza' ? 'ratingGozza' : 'ratingLolia';
-        film[key] = (film[key]===rating) ? 0 : rating;
-        save(); render();
-    }
-
-    function renderStars(filmId, person, rating) {
-        return [1,2,3,4,5].map(i => {
-            const on = i <= rating ? 'on' : '';
-            return `<button class="star-btn ${on}"
-                onclick="setRating(${filmId},'${person}',${i})"
-                onmouseover="previewStars(this,${i})"
-                onmouseout="resetStars(this,${rating})">★</button>`;
-        }).join('');
-    }
-
-    function previewStars(el, n) {
-        el.parentElement.querySelectorAll('.star-btn').forEach((s,i) =>
-            s.style.color = i < n ? '#e9a84c' : '');
-    }
-
-    function resetStars(el, rating) {
-        el.parentElement.querySelectorAll('.star-btn').forEach((s,i) =>
-            s.style.color = '');
-        el.parentElement.querySelectorAll('.star-btn').forEach((s,i) =>
-            s.classList.toggle('on', i < rating));
-    }
-
-    function buildGenreFilter() {
-        const genres = new Set();
-        films.forEach(f => { if(f.genre) f.genre.split('/').forEach(g => genres.add(g.trim())); });
-        const sel = document.getElementById('filter-genre');
-        const cur = sel.value;
-        sel.innerHTML = '<option value="">Tous genres</option>';
-        [...genres].sort().forEach(g => {
-            const o = document.createElement('option');
-            o.value = g; o.textContent = g; sel.appendChild(o);
-        });
-        sel.value = cur;
-    }
-
-    function filterFilms() {
-        const search = document.getElementById('search').value.toLowerCase();
-        const country = document.getElementById('filter-country').value;
-        const genre = document.getElementById('filter-genre').value;
-        const decade = document.getElementById('filter-decade').value;
-        const status = document.getElementById('filter-status').value;
-
-        return films.filter(film => {
-            const matchesSearch = film.title.toLowerCase().includes(search) ||
-                                 film.genre.toLowerCase().includes(search);
-            const matchesCountry = !country || film.country === country;
-            const matchesGenre = !genre || film.genre.toLowerCase().includes(genre.toLowerCase());
-            const matchesDecade = !decade || Math.floor(film.year / 10) * 10 === parseInt(decade);
-            const matchesStatus = !status ||
-                (status === 'vu' && (film.GozzaStatus === 'vu' || film.LoliaStatus === 'vu')) ||
-                (status === 'a-revoir' && (film.GozzaStatus === 'a-revoir' || film.LoliaStatus === 'a-revoir')) ||
-                (status === 'pas-vu' && film.GozzaStatus === 'pas-vu' && film.LoliaStatus === 'pas-vu');
-
-            return matchesSearch && matchesCountry && matchesGenre && matchesDecade && matchesStatus;
-        });
-    }
-
-    function sortFilms(list) {
-        if (!sortKey) return list;
-
-        return [...list].sort((a, b) => {
-            let valA = a[sortKey], valB = b[sortKey];
-
-            if (sortKey === 'title') {
-                valA = valA.toLowerCase();
-                valB = valB.toLowerCase();
-            }
-
-            if (typeof valA === 'string' && typeof valB === 'string') {
-                return sortDir === 'asc'
-                    ? valA.localeCompare(valB)
-                    : valB.localeCompare(valA);
-            } else {
-                return sortDir === 'asc'
-                    ? valA - valB
-                    : valB - valA;
-            }
-        });
-    }
-
-    function render() {
-        buildGenreFilter();
-        const list = sortFilms(filterFilms());
-
-        const tbody = document.getElementById('film-list');
-        tbody.innerHTML = '';
-
-        if (!list.length) {
-            tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state">
-                <i class="fa-solid fa-film-slash"></i>
-                <p>Aucun film ne correspond à ces filtres.</p>
-            </div></td></tr>`;
-        }
-
-        document.getElementById('results-count').textContent =
-            list.length === films.length
-                ? `${films.length} films`
-                : `${list.length} / ${films.length} films`;
-
-        list.forEach((film, idx) => {
-            const genreTags = (film.genre||'').split('/').map(g =>
-                `<span class="genre-tag">${g.trim()}</span>`).join('');
-
-            tbody.innerHTML += `
-                <tr>
-                    <td>${idx + 1}</td>
-                    <td>${film.title}</td>
-                    <td>${formatFlag(film.country)}</td>
-                    <td>${film.year}</td>
-                    <td>${genreTags}</td>
-                    <td>
-                        <button class="status-pill ${STATUS_CLASS[film.GozzaStatus]}"
-                            onclick="toggleStatus(${film.id},'Gozza')">
-                            ${STATUS_LABEL[film.GozzaStatus]} ${STATUS_ICON[film.GozzaStatus]}
-                        </button>
-                    </td>
-                    <td class="stars-cell">
-                        ${renderStars(film.id, 'Gozza', film.ratingGozza)}
-                    </td>
-                    <td>
-                        <button class="status-pill ${STATUS_CLASS[film.LoliaStatus]}"
-                            onclick="toggleStatus(${film.id},'Lolia')">
-                            ${STATUS_LABEL[film.LoliaStatus]} ${STATUS_ICON[film.LoliaStatus]}
-                        </button>
-                    </td>
-                    <td class="stars-cell">
-                        ${renderStars(film.id, 'Lolia', film.ratingLolia)}
-                    </td>
-                    <td>
-                        <button class="del-btn" onclick="confirmDelete(${film.id})"></button>
-                    </td>
-                </tr>
-            `;
-        });
-    }
-
-    function updateStats() {
-        document.getElementById('total-films').textContent = films.length;
-        document.getElementById('watched-Gozza').textContent = films.filter(f => f.GozzaStatus === 'vu').length;
-        document.getElementById('watched-Lolia').textContent = films.filter(f => f.LoliaStatus === 'vu').length;
-        document.getElementById('rewatch-count').textContent = films.filter(f => f.GozzaStatus === 'a-revoir' || f.LoliaStatus === 'a-revoir').length;
-    }
-
-    // Tri
-    document.querySelectorAll('th.sortable').forEach(th => {
-        th.addEventListener('click', () => {
-            const key = th.dataset.sort;
-            sortDir = (sortKey===key && sortDir==='asc') ? 'desc' : 'asc';
-            sortKey = key;
-            document.querySelectorAll('th.sortable').forEach(t=>t.classList.remove('asc','desc'));
-            th.classList.add(sortDir);
-            render();
-        });
-    });
-
-    // Filtres
-    ['search','filter-country','filter-genre','filter-decade','filter-status']
-        .forEach(id => {
-            document.getElementById(id).addEventListener('input', render);
-            document.getElementById(id).addEventListener('change', render);
-        });
-
-    document.getElementById('reset-filters-btn').addEventListener('click', () => {
-        document.getElementById('search').value = '';
-        ['filter-country','filter-genre','filter-decade','filter-status']
-            .forEach(id => { document.getElementById(id).value = ''; });
-        render();
-    });
-
-    // Film du jour
-    document.getElementById('random-film-btn').addEventListener('click', () => {
-        const filmDuJour = films[Math.floor(Math.random() * films.length)];
-        document.getElementById('film-du-jour-title').textContent = filmDuJour.title;
-        document.getElementById('film-du-jour-year').textContent = filmDuJour.year;
-        document.getElementById('film-du-jour-genre').textContent = filmDuJour.genre;
-        document.getElementById('film-du-jour-country').textContent = formatFlag(filmDuJour.country);
-
-        const filmDuJourElement = document.getElementById('film-du-jour');
-        filmDuJourElement.classList.add('show');
-
-        // Masquer après 5 secondes
-        setTimeout(() => {
-            filmDuJourElement.classList.remove('show');
-        }, 5000);
-    });
-
-    // Ajout
-    document.getElementById('add-film-btn').addEventListener('click', () =>
-        document.getElementById('add-film-modal').classList.add('show'));
-    ['close-add-modal','cancel-add'].forEach(id =>
-        document.getElementById(id).addEventListener('click', () =>
-            document.getElementById('add-film-modal').classList.remove('show')));
-
-    document.getElementById('confirm-add').addEventListener('click', () => {
-        const title = document.getElementById('new-film-title').value.trim();
-        const country = document.getElementById('new-film-country').value.trim();
-        const year = document.getElementById('new-film-year').value.trim();
-        const genre = document.getElementById('new-film-genre').value.trim();
-
-        if (!title) return;
-
-        const newFilm = {
-            id: nextId++,
-            title: title,
-            country: country || 'us',
-            year: year || 1999,
-            genre: genre || 'Drame',
-            GozzaStatus: 'pas-vu',
-            LoliaStatus: 'pas-vu',
-            ratingGozza: 0,
-            ratingLolia: 0
-        };
-
-        films.push(newFilm);
-        document.getElementById('add-film-modal').classList.remove('show');
-        document.getElementById('new-film-title').value = '';
-        document.getElementById('new-film-country').value = '';
-        document.getElementById('new-film-year').value = '';
-        document.getElementById('new-film-genre').value = '';
-        render();
-        updateStats();
-    });
-
-    // Suppression
-    function confirmDelete(id) {
-        filmToDelete = id;
-        document.getElementById('confirm-modal').classList.add('show');
-    }
-    document.getElementById('confirm-delete').addEventListener('click', () => {
-        if (filmToDelete !== null) {
-            films = films.filter(f=>f.id!==filmToDelete);
-            filmToDelete = null; render(); updateStats();
-        }
-        document.getElementById('confirm-modal').classList.remove('show');
-    });
-    document.getElementById('cancel-delete').addEventListener('click', () => {
-        filmToDelete = null;
-        document.getElementById('confirm-modal').classList.remove('show');
-    });
-
-    function save() {
-        // Sauvegarde des données dans le localStorage
-        localStorage.setItem('films', JSON.stringify(films));
-        localStorage.setItem('nextId', nextId);
-    }
-
-    function load() {
-        // Chargement des données depuis le localStorage
-        const savedFilms = localStorage.getItem('films');
-        const savedNextId = localStorage.getItem('nextId');
-
-        if (savedFilms) {
-            films = JSON.parse(savedFilms);
-            nextId = savedNextId ? parseInt(savedNextId) : Math.max(...films.map(f=>f.id)) + 1;
-        }
-    }
-
-    // Initialisation
-    document.addEventListener('DOMContentLoaded', () => {
-        load();
-        render();
-        updateStats();
-    });
-    </script>
+</script>
 </body>
 </html>
