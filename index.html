@@ -697,41 +697,26 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
         </div>
     </div>
 </div>
-<!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { 
-    getFirestore, collection, getDocs, setDoc, deleteDoc, doc, onSnapshot 
+    getFirestore, collection, setDoc, deleteDoc, doc, onSnapshot 
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // ── TA CONFIG FIREBASE (colle celle copiée à l'étape 1) ──
   const firebaseConfig = {
-  apiKey: "AIzaSyB6CCGHq96B6AH2r3Xv3ap8L945axfEEIg",
-  authDomain: "golia-669a0.firebaseapp.com",
-  projectId: "golia-669a0",
-  storageBucket: "golia-669a0.firebasestorage.app",
-  messagingSenderId: "1035355765763",
-  appId: "1:1035355765763:web:a12483699dd05e8e34a236"
-};
-
+    apiKey: "AIzaSyB6CCGHq96B6AH2r3Xv3ap8L945axfEEIg",
+    authDomain: "golia-669a0.firebaseapp.com",
+    projectId: "golia-669a0",
+    storageBucket: "golia-669a0.firebasestorage.app",
+    messagingSenderId: "1035355765763",
+    appId: "1:1035355765763:web:a12483699dd05e8e34a236"
+  };
 
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
   const filmsCol = collection(db, "films");
 
-  // ── ÉCOUTE EN TEMPS RÉEL ──────────────────────────────────
-  // Remplace le localStorage : dès qu'un film change côté Firebase,
-  // la page se met à jour automatiquement pour les deux utilisateurs
-  onSnapshot(filmsCol, (snapshot) => {
-    films = snapshot.docs.map(d => d.data());
-    // Recalcule nextId
-    nextId = films.length ? Math.max(...films.map(f => f.id)) + 1 : 1;
-    render();
-    updateStats();
-  });
-
-  // ── SAUVEGARDE VERS FIREBASE ──────────────────────────────
-  // On expose ces fonctions globalement pour que le reste du script les utilise
+  // ── Exposer les fonctions sur window ──
   window.saveFilmToDb = async (film) => {
     await setDoc(doc(db, "films", String(film.id)), film);
   };
@@ -740,15 +725,23 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
     await deleteDoc(doc(db, "films", String(id)));
   };
 
-  // ── CHARGEMENT INITIAL (optionnel, onSnapshot suffit) ─────
-  window.loadFilmsFromDb = async () => {
-    const snapshot = await getDocs(filmsCol);
-    films = snapshot.docs.map(d => d.data());
-    nextId = films.length ? Math.max(...films.map(f => f.id)) + 1 : 1;
-    render();
-    updateStats();
-  };
+  // ── Écoute temps réel ──
+  onSnapshot(filmsCol, (snapshot) => {
+    if (snapshot.empty) {
+      // Base vide → on importe les films
+      console.log("Base vide, import en cours...");
+      films.forEach(f => window.saveFilmToDb(f));
+      console.log("Films importés !");
+    } else {
+      // On charge depuis Firebase
+      films = snapshot.docs.map(d => d.data());
+      nextId = Math.max(...films.map(f => f.id)) + 1;
+      render();
+      updateStats();
+    }
+  });
 </script>
+
 
 <script>
 // ── DONNÉES ──────────────────────────────────────────────────────────────────
