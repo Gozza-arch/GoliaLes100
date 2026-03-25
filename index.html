@@ -1045,10 +1045,9 @@ function save() {
     if (window.saveFilmToDb) window.saveFilmToDb(film);
   });
 }
-    // Bouton pour réimporter toute la liste
-async function reimporterFilms() {
+    async function reimporterFilms() {
     for (const film of films) {
-        await db.collection('films').doc(String(film.id)).set(film);
+        await window.saveFilmToDb(film);
     }
     alert('Réimport terminé !');
 }
