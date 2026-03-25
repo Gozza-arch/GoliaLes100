@@ -528,12 +528,12 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
             <span class="stat-label">Films</span>
         </div>
         <div class="stat-card">
-            <span class="stat-number" id="watched-morgan">0</span>
-            <span class="stat-label">Vu (Morgan)</span>
+            <span class="stat-number" id="watched-Gozza">0</span>
+            <span class="stat-label">Vu (Gozza)</span>
         </div>
         <div class="stat-card">
-            <span class="stat-number" id="watched-sabrina">0</span>
-            <span class="stat-label">Vu (Sabrina)</span>
+            <span class="stat-number" id="watched-Lolia">0</span>
+            <span class="stat-label">Vu (Lolia)</span>
         </div>
         <div class="stat-card">
             <span class="stat-number" id="rewatch-count">0</span>
@@ -588,8 +588,8 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
             <option value="2020">2020–2029</option>
         </select>
 
-        <select id="filter-rating-morgan">
-            <option value="">⭐ Note Morgan</option>
+        <select id="filter-rating-Gozza">
+            <option value="">⭐ Note Gozza</option>
             <option value="5">5 étoiles</option>
             <option value="4">4+ étoiles</option>
             <option value="3">3+ étoiles</option>
@@ -598,8 +598,8 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
             <option value="0">Non noté</option>
         </select>
 
-        <select id="filter-rating-sabrina">
-            <option value="">⭐ Note Sabrina</option>
+        <select id="filter-rating-Lolia">
+            <option value="">⭐ Note Lolia</option>
             <option value="5">5 étoiles</option>
             <option value="4">4+ étoiles</option>
             <option value="3">3+ étoiles</option>
@@ -636,10 +636,10 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
                     <th class="sortable" data-sort="country">Pays</th>
                     <th class="sortable" data-sort="year">Année</th>
                     <th class="sortable" data-sort="genre">Genre</th>
-                    <th class="sortable" data-sort="morganStatus">Morgan</th>
-                    <th class="sortable" data-sort="ratingMorgan">Note (M)</th>
-                    <th class="sortable" data-sort="sabrinaStatus">Sabrina</th>
-                    <th class="sortable" data-sort="ratingSabrina">Note (S)</th>
+                    <th class="sortable" data-sort="GozzaStatus">Gozza</th>
+                    <th class="sortable" data-sort="ratingGozza">Note (G)</th>
+                    <th class="sortable" data-sort="LoliaStatus">Lolia</th>
+                    <th class="sortable" data-sort="ratingLolia">Note (L)</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -746,106 +746,106 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
 <script>
 // ── DONNÉES ──────────────────────────────────────────────────────────────────
 let films = [
-    { id:1,  title:"Le Parrain",                  country:"us",    year:1972, genre:"Drame/Crime",        morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:2,  title:"Taxi Driver",                 country:"us",    year:1976, genre:"Drame/Thriller",     morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:3,  title:"Apocalypse Now",              country:"us",    year:1979, genre:"Guerre/Drame",       morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:4,  title:"Le Voyage de Chihiro",        country:"jp",    year:2001, genre:"Animation/Fantastique", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:5,  title:"Le Dernier Tango à Paris",    country:"fr-it", year:1972, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:6,  title:"La Nuit américaine",          country:"fr",    year:1973, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:7,  title:"Star Wars : Épisode IV",      country:"us",    year:1977, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:8,  title:"Alien, le huitième passager", country:"gb-us", year:1979, genre:"Horreur/SF",         morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:9,  title:"Cris et chuchotements",       country:"se",    year:1972, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:10, title:"Le Miroir",                   country:"ru",    year:1975, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:11, title:"Barry Lyndon",                country:"gb-us", year:1975, genre:"Drame historique",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:12, title:"Les Dents de la mer",         country:"us",    year:1975, genre:"Thriller/Horreur",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:13, title:"Stalker",                     country:"ru",    year:1979, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:14, title:"Le Samouraï",                 country:"fr-it", year:1967, genre:"Policier",           morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:15, title:"Eraserhead",                  country:"us",    year:1977, genre:"Horreur/Surréaliste", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:16, title:"Blade Runner",                country:"us",    year:1982, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:17, title:"2001 : L'Odyssée de l'espace",country:"us",    year:1968, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:18, title:"Orange mécanique",            country:"gb",    year:1971, genre:"Drame/SF",           morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:19, title:"Shining",                     country:"gb",    year:1980, genre:"Horreur",            morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:20, title:"Mulholland Drive",            country:"us",    year:2001, genre:"Thriller/Mystère",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:21, title:"Parasite",                    country:"kr",    year:2019, genre:"Thriller",           morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:22, title:"Oldboy",                      country:"kr",    year:2003, genre:"Thriller",           morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:23, title:"Metropolis",                  country:"de",    year:1927, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:24, title:"Les 400 coups",               country:"fr",    year:1959, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:25, title:"Rashōmon",                    country:"jp",    year:1950, genre:"Drame/Crime",        morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:26, title:"Pulp Fiction",                country:"us",    year:1994, genre:"Crime",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:27, title:"Fight Club",                  country:"us",    year:1999, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:28, title:"The Dark Knight",             country:"us",    year:2008, genre:"Action/Thriller",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:29, title:"Inception",                   country:"us",    year:2010, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:30, title:"The Matrix",                  country:"us",    year:1999, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:31, title:"Forrest Gump",                country:"us",    year:1994, genre:"Drame/Comédie",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:32, title:"The Shawshank Redemption",    country:"us",    year:1994, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:33, title:"The Godfather Part II",       country:"us",    year:1974, genre:"Drame/Crime",        morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:34, title:"12 Angry Men",                country:"us",    year:1957, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:35, title:"Schindler's List",            country:"us",    year:1993, genre:"Drame/Historique",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:36, title:"The Lord of the Rings: The Return of the King", country:"nz-us", year:2003, genre:"Fantastique/Aventure", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:37, title:"Goodfellas",                  country:"us",    year:1990, genre:"Crime/Drame",        morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:38, title:"The Silence of the Lambs",    country:"us",    year:1991, genre:"Thriller/Horreur",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:39, title:"Se7en",                       country:"us",    year:1995, genre:"Thriller/Policier",  morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:40, title:"The Usual Suspects",          country:"us",    year:1995, genre:"Thriller",           morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:41, title:"City of God",                 country:"br",    year:2002, genre:"Crime/Drame",        morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:42, title:"The Pianist",                 country:"pl-fr", year:2002, genre:"Drame/Historique",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:43, title:"Spirited Away",               country:"jp",    year:2001, genre:"Animation/Fantastique", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:44, title:"Life Is Beautiful",           country:"it",    year:1997, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:45, title:"The Big Lebowski",            country:"us",    year:1998, genre:"Comédie/Noir",       morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:46, title:"Trainspotting",               country:"gb",    year:1996, genre:"Drame/Comédie noire", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:47, title:"Le Dîner de cons",            country:"fr",    year:1998, genre:"Comédie",            morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:48, title:"Amélie Poulain",              country:"fr",    year:2001, genre:"Comédie/Romantique", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:49, title:"La Haine",                    country:"fr",    year:1995, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:50, title:"Intouchables",                country:"fr",    year:2011, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:51, title:"The Social Network",          country:"us",    year:2010, genre:"Drame/Biographique", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:52, title:"Whiplash",                    country:"us",    year:2014, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:53, title:"La La Land",                  country:"us",    year:2016, genre:"Comédie musicale",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:54, title:"The Grand Budapest Hotel",    country:"us",    year:2014, genre:"Comédie",            morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:55, title:"Mad Max: Fury Road",          country:"au",    year:2015, genre:"Action/SF",          morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:56, title:"Arrival",                     country:"us",    year:2016, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:57, title:"Get Out",                     country:"us",    year:2017, genre:"Horreur/Thriller",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:58, title:"The Shape of Water",          country:"us",    year:2017, genre:"Fantastique/Romance", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:59, title:"Joker",                       country:"us",    year:2019, genre:"Drame/Thriller",     morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:60, title:"Once Upon a Time in Hollywood", country:"us", year:2019, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:61, title:"1917",                        country:"gb",    year:2019, genre:"Guerre/Drame",       morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:62, title:"Dune",                        country:"us",    year:2021, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:63, title:"Everything Everywhere All at Once", country:"us", year:2022, genre:"Science-fiction/Action", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:64, title:"The Truman Show",             country:"us",    year:1998, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:65, title:"Eternal Sunshine of the Spotless Mind", country:"us", year:2004, genre:"Science-fiction/Romance", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:66, title:"Requiem for a Dream",         country:"us",    year:2000, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:67, title:"Donnie Darko",                country:"us",    year:2001, genre:"Science-fiction/Thriller", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:68, title:"Memento",                     country:"us",    year:2000, genre:"Thriller/Mystère",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:69, title:"The Prestige",                country:"us",    year:2006, genre:"Thriller/Mystère",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:70, title:"Interstellar",                country:"us",    year:2014, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:71, title:"The Revenant",                country:"us",    year:2015, genre:"Aventure/Drame",     morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:72, title:"Birdman",                     country:"us",    year:2014, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:73, title:"The Wolf of Wall Street",     country:"us",    year:2013, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:74, title:"Django Unchained",            country:"us",    year:2012, genre:"Western",            morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:75, title:"Inglourious Basterds",        country:"us",    year:2009, genre:"Guerre",             morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:76, title:"No Country for Old Men",      country:"us",    year:2007, genre:"Thriller",           morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:77, title:"There Will Be Blood",         country:"us",    year:2007, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:78, title:"Children of Men",             country:"gb",    year:2006, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:79, title:"The Departed",                country:"us",    year:2006, genre:"Thriller/Crime",     morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:80, title:"Eternal Sunshine of the Spotless Mind", country:"us", year:2004, genre:"Science-fiction/Romance", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:81, title:"Lost in Translation",         country:"us",    year:2003, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:82, title:"The Royal Tenenbaums",        country:"us",    year:2001, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:83, title:"American Beauty",             country:"us",    year:1999, genre:"Drame",              morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:84, title:"Fargo",                       country:"us",    year:1996, genre:"Thriller/Comédie noire", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:85, title:"The Sixth Sense",             country:"us",    year:1999, genre:"Thriller/Horreur",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:86, title:"The Green Mile",              country:"us",    year:1999, genre:"Drame/Fantastique",  morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:87, title:"Saving Private Ryan",         country:"us",    year:1998, genre:"Guerre/Drame",       morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:88, title:"The Lion King",               country:"us",    year:1994, genre:"Animation/Aventure", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:89, title:"Toy Story",                   country:"us",    year:1995, genre:"Animation/Aventure", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:90, title:"The Terminator",              country:"us",    year:1984, genre:"Science-fiction",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:91, title:"Back to the Future",          country:"us",    year:1985, genre:"Science-fiction/Comédie", morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:92, title:"Die Hard",                    country:"us",    year:1988, genre:"Action/Thriller",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:93, title:"The Princess Bride",          country:"us",    year:1987, genre:"Aventure/Comédie",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:94, title:"This Is Spinal Tap",          country:"us",    year:1984, genre:"Comédie/Musical",    morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:95, title:"The Breakfast Club",          country:"us",    year:1985, genre:"Comédie/Drame",      morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:96, title:"Ferris Bueller's Day Off",    country:"us",    year:1986, genre:"Comédie",            morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:97, title:"Ghostbusters",                country:"us",    year:1984, genre:"Comédie/SF",         morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:98, title:"The Goonies",                 country:"us",    year:1985, genre:"Aventure/Comédie",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:99, title:"Stand by Me",                 country:"us",    year:1986, genre:"Drame/Aventure",     morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 },
-    { id:100,title:"Cinema Paradiso",             country:"it",    year:1988, genre:"Drame/Romantique",   morganStatus:"pas-vu", sabrinaStatus:"pas-vu", ratingMorgan:0, ratingSabrina:0 }
+    { id:1,  title:"Le Parrain",                  country:"us",    year:1972, genre:"Drame/Crime",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:2,  title:"Taxi Driver",                 country:"us",    year:1976, genre:"Drame/Thriller",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:3,  title:"Apocalypse Now",              country:"us",    year:1979, genre:"Guerre/Drame",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:4,  title:"Le Voyage de Chihiro",        country:"jp",    year:2001, genre:"Animation/Fantastique", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:5,  title:"Le Dernier Tango à Paris",    country:"fr-it", year:1972, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:6,  title:"La Nuit américaine",          country:"fr",    year:1973, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:7,  title:"Star Wars : Épisode IV",      country:"us",    year:1977, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:8,  title:"Alien, le huitième passager", country:"gb-us", year:1979, genre:"Horreur/SF",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:9,  title:"Cris et chuchotements",       country:"se",    year:1972, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:10, title:"Le Miroir",                   country:"ru",    year:1975, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:11, title:"Barry Lyndon",                country:"gb-us", year:1975, genre:"Drame historique",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:12, title:"Les Dents de la mer",         country:"us",    year:1975, genre:"Thriller/Horreur",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:13, title:"Stalker",                     country:"ru",    year:1979, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:14, title:"Le Samouraï",                 country:"fr-it", year:1967, genre:"Policier",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:15, title:"Eraserhead",                  country:"us",    year:1977, genre:"Horreur/Surréaliste", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:16, title:"Blade Runner",                country:"us",    year:1982, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:17, title:"2001 : L'Odyssée de l'espace",country:"us",    year:1968, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:18, title:"Orange mécanique",            country:"gb",    year:1971, genre:"Drame/SF",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:19, title:"Shining",                     country:"gb",    year:1980, genre:"Horreur",            GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:20, title:"Mulholland Drive",            country:"us",    year:2001, genre:"Thriller/Mystère",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:21, title:"Parasite",                    country:"kr",    year:2019, genre:"Thriller",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:22, title:"Oldboy",                      country:"kr",    year:2003, genre:"Thriller",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:23, title:"Metropolis",                  country:"de",    year:1927, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:24, title:"Les 400 coups",               country:"fr",    year:1959, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:25, title:"Rashōmon",                    country:"jp",    year:1950, genre:"Drame/Crime",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:26, title:"Pulp Fiction",                country:"us",    year:1994, genre:"Crime",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:27, title:"Fight Club",                  country:"us",    year:1999, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:28, title:"The Dark Knight",             country:"us",    year:2008, genre:"Action/Thriller",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:29, title:"Inception",                   country:"us",    year:2010, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:30, title:"The Matrix",                  country:"us",    year:1999, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:31, title:"Forrest Gump",                country:"us",    year:1994, genre:"Drame/Comédie",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:32, title:"The Shawshank Redemption",    country:"us",    year:1994, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:33, title:"The Godfather Part II",       country:"us",    year:1974, genre:"Drame/Crime",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:34, title:"12 Angry Men",                country:"us",    year:1957, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:35, title:"Schindler's List",            country:"us",    year:1993, genre:"Drame/Historique",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:36, title:"The Lord of the Rings: The Return of the King", country:"nz-us", year:2003, genre:"Fantastique/Aventure", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:37, title:"Goodfellas",                  country:"us",    year:1990, genre:"Crime/Drame",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:38, title:"The Silence of the Lambs",    country:"us",    year:1991, genre:"Thriller/Horreur",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:39, title:"Se7en",                       country:"us",    year:1995, genre:"Thriller/Policier",  GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:40, title:"The Usual Suspects",          country:"us",    year:1995, genre:"Thriller",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:41, title:"City of God",                 country:"br",    year:2002, genre:"Crime/Drame",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:42, title:"The Pianist",                 country:"pl-fr", year:2002, genre:"Drame/Historique",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:43, title:"Spirited Away",               country:"jp",    year:2001, genre:"Animation/Fantastique", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:44, title:"Life Is Beautiful",           country:"it",    year:1997, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:45, title:"The Big Lebowski",            country:"us",    year:1998, genre:"Comédie/Noir",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:46, title:"Trainspotting",               country:"gb",    year:1996, genre:"Drame/Comédie noire", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:47, title:"Le Dîner de cons",            country:"fr",    year:1998, genre:"Comédie",            GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:48, title:"Amélie Poulain",              country:"fr",    year:2001, genre:"Comédie/Romantique", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:49, title:"La Haine",                    country:"fr",    year:1995, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:50, title:"Intouchables",                country:"fr",    year:2011, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:51, title:"The Social Network",          country:"us",    year:2010, genre:"Drame/Biographique", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:52, title:"Whiplash",                    country:"us",    year:2014, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:53, title:"La La Land",                  country:"us",    year:2016, genre:"Comédie musicale",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:54, title:"The Grand Budapest Hotel",    country:"us",    year:2014, genre:"Comédie",            GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:55, title:"Mad Max: Fury Road",          country:"au",    year:2015, genre:"Action/SF",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:56, title:"Arrival",                     country:"us",    year:2016, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:57, title:"Get Out",                     country:"us",    year:2017, genre:"Horreur/Thriller",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:58, title:"The Shape of Water",          country:"us",    year:2017, genre:"Fantastique/Romance", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:59, title:"Joker",                       country:"us",    year:2019, genre:"Drame/Thriller",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:60, title:"Once Upon a Time in Hollywood", country:"us", year:2019, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:61, title:"1917",                        country:"gb",    year:2019, genre:"Guerre/Drame",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:62, title:"Dune",                        country:"us",    year:2021, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:63, title:"Everything Everywhere All at Once", country:"us", year:2022, genre:"Science-fiction/Action", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:64, title:"The Truman Show",             country:"us",    year:1998, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:65, title:"Eternal Sunshine of the Spotless Mind", country:"us", year:2004, genre:"Science-fiction/Romance", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:66, title:"Requiem for a Dream",         country:"us",    year:2000, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:67, title:"Donnie Darko",                country:"us",    year:2001, genre:"Science-fiction/Thriller", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:68, title:"Memento",                     country:"us",    year:2000, genre:"Thriller/Mystère",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:69, title:"The Prestige",                country:"us",    year:2006, genre:"Thriller/Mystère",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:70, title:"Interstellar",                country:"us",    year:2014, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:71, title:"The Revenant",                country:"us",    year:2015, genre:"Aventure/Drame",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:72, title:"Birdman",                     country:"us",    year:2014, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:73, title:"The Wolf of Wall Street",     country:"us",    year:2013, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:74, title:"Django Unchained",            country:"us",    year:2012, genre:"Western",            GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:75, title:"Inglourious Basterds",        country:"us",    year:2009, genre:"Guerre",             GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:76, title:"No Country for Old Men",      country:"us",    year:2007, genre:"Thriller",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:77, title:"There Will Be Blood",         country:"us",    year:2007, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:78, title:"Children of Men",             country:"gb",    year:2006, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:79, title:"The Departed",                country:"us",    year:2006, genre:"Thriller/Crime",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:80, title:"Eternal Sunshine of the Spotless Mind", country:"us", year:2004, genre:"Science-fiction/Romance", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:81, title:"Lost in Translation",         country:"us",    year:2003, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:82, title:"The Royal Tenenbaums",        country:"us",    year:2001, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:83, title:"American Beauty",             country:"us",    year:1999, genre:"Drame",              GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:84, title:"Fargo",                       country:"us",    year:1996, genre:"Thriller/Comédie noire", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:85, title:"The Sixth Sense",             country:"us",    year:1999, genre:"Thriller/Horreur",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:86, title:"The Green Mile",              country:"us",    year:1999, genre:"Drame/Fantastique",  GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:87, title:"Saving Private Ryan",         country:"us",    year:1998, genre:"Guerre/Drame",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:88, title:"The Lion King",               country:"us",    year:1994, genre:"Animation/Aventure", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:89, title:"Toy Story",                   country:"us",    year:1995, genre:"Animation/Aventure", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:90, title:"The Terminator",              country:"us",    year:1984, genre:"Science-fiction",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:91, title:"Back to the Future",          country:"us",    year:1985, genre:"Science-fiction/Comédie", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:92, title:"Die Hard",                    country:"us",    year:1988, genre:"Action/Thriller",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:93, title:"The Princess Bride",          country:"us",    year:1987, genre:"Aventure/Comédie",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:94, title:"This Is Spinal Tap",          country:"us",    year:1984, genre:"Comédie/Musical",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:95, title:"The Breakfast Club",          country:"us",    year:1985, genre:"Comédie/Drame",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:96, title:"Ferris Bueller's Day Off",    country:"us",    year:1986, genre:"Comédie",            GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:97, title:"Ghostbusters",                country:"us",    year:1984, genre:"Comédie/SF",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:98, title:"The Goonies",                 country:"us",    year:1985, genre:"Aventure/Comédie",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:99, title:"Stand by Me",                 country:"us",    year:1986, genre:"Drame/Aventure",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+    { id:100,title:"Cinema Paradiso",             country:"it",    year:1988, genre:"Drame/Romantique",   GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 }
 ];
 
 let sortKey = null, sortDir = 'asc', filmToDelete = null;
@@ -871,8 +871,8 @@ const STATUS_CLASS = { 'vu':'watched', 'a-revoir':'rewatch', 'pas-vu':'not-watch
 
 function toggleStatus(filmId, person) {
     const film = films.find(f=>f.id===filmId); if(!film) return;
-    const key = person==='morgan' ? 'morganStatus' : 'sabrinaStatus';
-    const rk  = person==='morgan' ? 'ratingMorgan' : 'ratingSabrina';
+    const key = person==='Gozza' ? 'GozzaStatus' : 'LoliaStatus';
+    const rk  = person==='Gozza' ? 'ratingGozza' : 'ratingLolia';
     if (film[key]==='pas-vu') { film[key]='vu'; if(!film[rk]) film[rk]=1; }
     else if (film[key]==='vu')  { film[key]='a-revoir'; }
     else { film[key]='pas-vu'; film[rk]=0; }
@@ -882,7 +882,7 @@ function toggleStatus(filmId, person) {
 // ── NOTES ÉTOILES ────────────────────────────────────────────────────────────
 function setRating(filmId, person, rating) {
     const film = films.find(f=>f.id===filmId); if(!film) return;
-    const key = person==='morgan' ? 'ratingMorgan' : 'ratingSabrina';
+    const key = person==='Gozza' ? 'ratingGozza' : 'ratingLolia';
     // Clic sur la même étoile = retirer la note
     film[key] = (film[key]===rating) ? 0 : rating;
     save(); render();
@@ -930,8 +930,8 @@ function render() {
     const filterCountry = document.getElementById('filter-country').value;
     const filterGenre   = document.getElementById('filter-genre').value;
     const filterDecade  = document.getElementById('filter-decade').value;
-    const filterRatingM = document.getElementById('filter-rating-morgan').value;
-    const filterRatingS = document.getElementById('filter-rating-sabrina').value;
+    const filterRatingM = document.getElementById('filter-rating-Gozza').value;
+    const filterRatingS = document.getElementById('filter-rating-Lolia').value;
     const filterStatus  = document.getElementById('filter-status').value;
 
     let list = films.filter(f => {
@@ -944,15 +944,15 @@ function render() {
         }
         if (filterRatingM !== '') {
             const v = parseInt(filterRatingM);
-            if (v === 0 && f.ratingMorgan !== 0) return false;
-            if (v > 0  && f.ratingMorgan < v)    return false;
+            if (v === 0 && f.ratingGozza !== 0) return false;
+            if (v > 0  && f.ratingGozza < v)    return false;
         }
         if (filterRatingS !== '') {
             const v = parseInt(filterRatingS);
-            if (v === 0 && f.ratingSabrina !== 0) return false;
-            if (v > 0  && f.ratingSabrina < v)    return false;
+            if (v === 0 && f.ratingLolia !== 0) return false;
+            if (v > 0  && f.ratingLolia < v)    return false;
         }
-        if (filterStatus && f.morganStatus !== filterStatus && f.sabrinaStatus !== filterStatus) return false;
+        if (filterStatus && f.GozzaStatus !== filterStatus && f.LoliaStatus !== filterStatus) return false;
         return true;
     });
 
@@ -980,22 +980,22 @@ function render() {
             <td>${film.year}</td>
             <td>${film.genre||''}</td>
             <td style="text-align:center">
-                <button class="status-badge ${STATUS_CLASS[film.morganStatus]}"
-                        onclick="toggleStatus(${film.id},'morgan')">
-                    ${STATUS_LABEL[film.morganStatus]}
+                <button class="status-badge ${STATUS_CLASS[film.GozzaStatus]}"
+                        onclick="toggleStatus(${film.id},'Gozza')">
+                    ${STATUS_LABEL[film.GozzaStatus]}
                 </button>
             </td>
             <td style="text-align:center">
-                <span class="star-rating">${renderStars(film.id,'morgan',film.ratingMorgan)}</span>
+                <span class="star-rating">${renderStars(film.id,'Gozza',film.ratingGozza)}</span>
             </td>
             <td style="text-align:center">
-                <button class="status-badge ${STATUS_CLASS[film.sabrinaStatus]}"
-                        onclick="toggleStatus(${film.id},'sabrina')">
-                    ${STATUS_LABEL[film.sabrinaStatus]}
+                <button class="status-badge ${STATUS_CLASS[film.LoliaStatus]}"
+                        onclick="toggleStatus(${film.id},'Lolia')">
+                    ${STATUS_LABEL[film.LoliaStatus]}
                 </button>
             </td>
             <td style="text-align:center">
-                <span class="star-rating">${renderStars(film.id,'sabrina',film.ratingSabrina)}</span>
+                <span class="star-rating">${renderStars(film.id,'Lolia',film.ratingLolia)}</span>
             </td>
             <td>
                 <button class="delete-btn" onclick="confirmDelete(${film.id})" title="Supprimer">
@@ -1012,9 +1012,9 @@ function render() {
 // ── STATS ────────────────────────────────────────────────────────────────────
 function updateStats() {
     document.getElementById('total-films').textContent     = films.length;
-    document.getElementById('watched-morgan').textContent  = films.filter(f=>f.morganStatus==='vu').length;
-    document.getElementById('watched-sabrina').textContent = films.filter(f=>f.sabrinaStatus==='vu').length;
-    document.getElementById('rewatch-count').textContent   = films.filter(f=>f.morganStatus==='a-revoir'||f.sabrinaStatus==='a-revoir').length;
+    document.getElementById('watched-Gozza').textContent  = films.filter(f=>f.GozzaStatus==='vu').length;
+    document.getElementById('watched-Lolia').textContent = films.filter(f=>f.LoliaStatus==='vu').length;
+    document.getElementById('rewatch-count').textContent   = films.filter(f=>f.GozzaStatus==='a-revoir'||f.LoliaStatus==='a-revoir').length;
 }
 
 // ── TRI ──────────────────────────────────────────────────────────────────────
@@ -1030,21 +1030,21 @@ document.querySelectorAll('th.sortable').forEach(th => {
 });
 
 // ── FILTRES ──────────────────────────────────────────────────────────────────
-['search','filter-country','filter-genre','filter-decade','filter-rating-morgan','filter-rating-sabrina','filter-status']
+['search','filter-country','filter-genre','filter-decade','filter-rating-Gozza','filter-rating-Lolia','filter-status']
     .forEach(id => document.getElementById(id).addEventListener('input', render));
-['filter-country','filter-genre','filter-decade','filter-rating-morgan','filter-rating-sabrina','filter-status']
+['filter-country','filter-genre','filter-decade','filter-rating-Gozza','filter-rating-Lolia','filter-status']
     .forEach(id => document.getElementById(id).addEventListener('change', render));
 
 document.getElementById('reset-filters-btn').addEventListener('click', () => {
     document.getElementById('search').value = '';
-    ['filter-country','filter-genre','filter-decade','filter-rating-morgan','filter-rating-sabrina','filter-status']
+    ['filter-country','filter-genre','filter-decade','filter-rating-Gozza','filter-rating-Lolia','filter-status']
         .forEach(id => { document.getElementById(id).value = ''; });
     render();
 });
 
 // ── FILM ALÉATOIRE ───────────────────────────────────────────────────────────
 document.getElementById('random-film-btn').addEventListener('click', () => {
-    const pool = films.filter(f=>f.morganStatus==='pas-vu'||f.sabrinaStatus==='pas-vu');
+    const pool = films.filter(f=>f.GozzaStatus==='pas-vu'||f.LoliaStatus==='pas-vu');
     const pick = (pool.length ? pool : films)[Math.floor(Math.random()*(pool.length||films.length))];
     document.getElementById('suggestion-text').textContent =
         `🎲 Film suggéré : ${pick.title} (${pick.year})${pick.genre ? ' — '+pick.genre : ''}`;
@@ -1068,7 +1068,7 @@ document.getElementById('confirm-add').addEventListener('click', () => {
     const genre  = document.getElementById('new-film-genre').value.trim();
     if (!title || !year) { alert('Le titre et l\'année sont requis.'); return; }
     films.push({ id:nextId++, title, country, year, genre:genre||'Non défini',
-        morganStatus:'pas-vu', sabrinaStatus:'pas-vu', ratingMorgan:0, ratingSabrina:0 });
+        GozzaStatus:'pas-vu', LoliaStatus:'pas-vu', ratingGozza:0, ratingLolia:0 });
     document.getElementById('new-film-title').value='';
     document.getElementById('new-film-genre').value='';
     document.getElementById('add-film-modal').classList.remove('show');
