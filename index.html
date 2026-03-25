@@ -732,14 +732,6 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
   render();
   updateStats();
 });
-   
-      // On charge depuis Firebase
-      films = snapshot.docs.map(d => d.data());
-      nextId = Math.max(...films.map(f => f.id)) + 1;
-      render();
-      updateStats();
-    }
-  });
 </script>
 
 
