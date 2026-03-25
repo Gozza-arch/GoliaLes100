@@ -36,7 +36,7 @@ body {
     min-height: 100vh;
 }
 
-.container { max-width: 1300px; margin: 0 auto; }
+.container {max-width: 1300px; margin: 0 auto;}
 
 /* ── HEADER ── */
 .site-header {
@@ -191,9 +191,9 @@ body {
     box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
 }
 
-.search-box input::placeholder { color: var(--muted); }
+.search-box input::placeholder {color: var(--muted);}
 
-.actions-top { display: flex; gap: 8px; }
+.actions-top {display: flex; gap: 8px;}
 
 /* ── FILTRES ── */
 .filters-row {
@@ -699,8 +699,7 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
 </div>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { 
-    getFirestore, collection, setDoc, deleteDoc, doc, onSnapshot 
+  import { getFirestore, collection, setDoc, deleteDoc, doc, onSnapshot 
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -716,7 +715,6 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
   const db  = getFirestore(app);
   const filmsCol = collection(db, "films");
 
-  // ── Exposer les fonctions sur window ──
   window.saveFilmToDb = async (film) => {
     await setDoc(doc(db, "films", String(film.id)), film);
   };
@@ -725,13 +723,15 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
     await deleteDoc(doc(db, "films", String(id)));
   };
 
-  // ── Écoute temps réel ──
+  // ✅ onSnapshot propre, sans doublon
   onSnapshot(filmsCol, (snapshot) => {
-  films = snapshot.docs.map(d => d.data());
-  nextId = Math.max(...films.map(f => f.id)) + 1;
-  render();
-  updateStats();
-});
+    if (!snapshot.empty) {
+      films = snapshot.docs.map(d => d.data());
+      nextId = Math.max(...films.map(f => f.id)) + 1;
+      render();
+      updateStats();
+    }
+  });
 </script>
 
 
@@ -1054,20 +1054,26 @@ document.getElementById('add-film-btn').addEventListener('click', () =>
         document.getElementById('add-film-modal').classList.remove('show')));
 
 document.getElementById('confirm-add').addEventListener('click', () => {
-    const title  = document.getElementById('new-film-title').value.trim();
-    const country= document.getElementById('new-film-country').value;
-    const year   = parseInt(document.getElementById('new-film-year').value);
-    const genre  = document.getElementById('new-film-genre').value.trim();
+    const title   = document.getElementById('new-film-title').value.trim();
+    const country = document.getElementById('new-film-country').value;
+    const year    = parseInt(document.getElementById('new-film-year').value);
+    const genre   = document.getElementById('new-film-genre').value.trim();
     if (!title || !year) { alert('Le titre et l\'année sont requis.'); return; }
-    const newFilm = { id:nextId++, title, country, year, genre:genre||'Non défini',
-    GozzaStatus:'pas-vu', LoliaStatus:'pas-vu', ratingGozza:0, ratingLolia:0 };
-if (window.saveFilmToDb) window.saveFilmToDb(newFilm);
-// Ne pas push manuellement, onSnapshot le fera automatiquement
-    document.getElementById('new-film-title').value='';
-    document.getElementById('new-film-genre').value='';
+    
+    const newFilm = { 
+        id: nextId++, title, country, year, 
+        genre: genre||'Non défini',
+        GozzaStatus:'pas-vu', LoliaStatus:'pas-vu', 
+        ratingGozza:0, ratingLolia:0 
+    };
+    // ✅ Firebase uniquement, onSnapshot met à jour automatiquement
+    if (window.saveFilmToDb) window.saveFilmToDb(newFilm);
+    
+    document.getElementById('new-film-title').value = '';
+    document.getElementById('new-film-genre').value = '';
     document.getElementById('add-film-modal').classList.remove('show');
-    save(); render(); updateStats();
 });
+
 
 // ── SUPPRESSION ──────────────────────────────────────────────────────────────
 function confirmDelete(id) {
@@ -1098,9 +1104,10 @@ function load() {
   // Le chargement est maintenant géré par onSnapshot Firebase
   // On garde les films par défaut si Firebase n'est pas encore chargé
 }
-
-// ── INIT ─────────────────────────────────────────────────────────────────────
+// ✅ Supprimer le setTimeout complètement
 load(); render(); updateStats();
+// ← FIN, rien d'autre
+
 </script>
 </body>
 </html>
