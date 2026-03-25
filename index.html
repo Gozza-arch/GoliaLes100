@@ -1108,12 +1108,6 @@ function save() {
     }
     alert('Réimport terminé !');
 }
-async function importFilms() {
-  for (const film of filmsToImport) {
-    await window.saveFilmToDb(film); // Utilisez la fonction déjà définie
-  }
-  console.log("Import terminé !");
-}
 importFilms();
 
 	function load() {
