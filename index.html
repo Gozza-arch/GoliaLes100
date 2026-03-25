@@ -727,12 +727,12 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
 
   // ── Écoute temps réel ──
   onSnapshot(filmsCol, (snapshot) => {
-    if (snapshot.empty) {
-      // Base vide → on importe les films
-      console.log("Base vide, import en cours...");
-      films.forEach(f => window.saveFilmToDb(f));
-      console.log("Films importés !");
-    } else {
+  films = snapshot.docs.map(d => d.data());
+  nextId = Math.max(...films.map(f => f.id)) + 1;
+  render();
+  updateStats();
+});
+   
       // On charge depuis Firebase
       films = snapshot.docs.map(d => d.data());
       nextId = Math.max(...films.map(f => f.id)) + 1;
