@@ -655,6 +655,47 @@ tbody tr:hover .del-btn { opacity: 0.6; }
     border: 1px solid var(--border);
 }
 
+/* ─── FILM DU JOUR ──────────────────────────────────────────────── */
+.film-du-jour {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-bottom: 24px;
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.film-du-jour.show {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.film-du-jour-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+}
+
+.film-du-jour-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.film-du-jour-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
 /* Espacement des icônes dans les boutons */
 .nav-btn i, .close-btn i, .status-btn i, .btn-ghost i, .btn-danger i {
     margin-right: 6px;
@@ -687,7 +728,7 @@ tbody tr:hover .del-btn { opacity: 0.6; }
     .site-header, .hero, .stats-strip, .main-wrap { padding-left: 16px; padding-right: 16px; }
     .hero-title { font-size: 1.6rem; }
     .table-wrap { overflow-x: auto; }
-    }
+}
 </style>
 </head>
 <body>
@@ -695,9 +736,7 @@ tbody tr:hover .del-btn { opacity: 0.6; }
     <header class="site-header">
         <div class="header-inner">
             <a href="#" class="logo-mark">
-                <div class="logo-circles">
-                    <span></span><span></span><span></span>
-                </div>
+                <img src="https://i.imgur.com/3QY7X5L.jpg" alt="Logo" width="40" height="40" style="border-radius: 50%;">
                 <div>
                     <div class="logo-text">CinéList</div>
                 </div>
@@ -706,7 +745,7 @@ tbody tr:hover .del-btn { opacity: 0.6; }
             <div class="header-sep"></div>
             <div class="header-nav">
                 <button id="random-film-btn" class="nav-btn">
-                    <i class="fa-solid fa-dice"></i> Aléatoire
+                    <i class="fa-solid fa-film"></i> Film du jour
                 </button>
                 <button id="add-film-btn" class="nav-btn primary">
                     <i class="fa-solid fa-plus"></i> Ajouter
@@ -714,6 +753,16 @@ tbody tr:hover .del-btn { opacity: 0.6; }
             </div>
         </div>
     </header>
+
+    <!-- FILM DU JOUR -->
+    <div id="film-du-jour" class="film-du-jour">
+        <h3 class="film-du-jour-title" id="film-du-jour-title">Titre du film</h3>
+        <div class="film-du-jour-meta">
+            <span><i class="fa-solid fa-calendar"></i> <span id="film-du-jour-year">1999</span></span>
+            <span><i class="fa-solid fa-film"></i> <span id="film-du-jour-genre">Genre</span></span>
+            <span><i class="fa-solid fa-globe"></i> <span id="film-du-jour-country">Pays</span></span>
+        </div>
+    </div>
 
     <!-- HERO -->
     <div class="hero">
@@ -800,114 +849,75 @@ tbody tr:hover .del-btn { opacity: 0.6; }
             <div class="results-badge" id="results-count"></div>
         </div>
 
-        <!-- SUGGESTION -->
-        <div id="random-film-suggestion" class="suggestion-banner">
-            <i class="fa-solid fa-dice"></i>
-            <span id="suggestion-text"></span>
-            <button id="close-suggestion" class="close-btn">
-                <i class="fa-solid fa-xmark"></i> Fermer
-            </button>
-        </div>
-
         <!-- TABLE -->
         <div class="table-wrap">
-            <table id="film-table">
+            <table>
                 <thead>
                     <tr>
-                        <th style="width:36px;">#</th>
-                        <th class="sortable" data-sort="title">Titre <span class="sort-icon">↕</span></th>
-                        <th class="sortable" data-sort="country" style="width:60px;">Pays <span class="sort-icon">↕</span></th>
-                        <th class="sortable" data-sort="year" style="width:70px;">Année <span class="sort-icon">↕</span></th>
-                        <th class="sortable" data-sort="genre">Genre <span class="sort-icon">↕</span></th>
-                        <th style="width:100px;">Gozza</th>
-                        <th style="width:110px;">Note G</th>
-                        <th style="width:100px;">Lolia</th>
-                        <th style="width:110px;">Note L</th>
-                        <th style="width:40px;"></th>
+                        <th class="sortable" data-sort="id">#</th>
+                        <th class="sortable" data-sort="title">Titre</th>
+                        <th class="sortable" data-sort="country">Pays</th>
+                        <th class="sortable" data-sort="year">Année</th>
+                        <th>Genres</th>
+                        <th>Gozza</th>
+                        <th>Note Gozza</th>
+                        <th>Lolia</th>
+                        <th>Note Lolia</th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody id="film-list"></tbody>
+                <tbody id="film-list">
+                    <!-- Films seront ajoutés ici -->
+                </tbody>
             </table>
         </div>
     </div>
 
-    <!-- MODAL AJOUT -->
+    <!-- MODALS -->
     <div id="add-film-modal" class="modal">
         <div class="modal-box">
-            <div class="modal-title">Ajouter un film</div>
+            <h3 class="modal-title">Ajouter un film</h3>
             <div class="form-field">
-                <label class="form-label">Titre</label>
+                <label class="form-label" for="new-film-title">Titre</label>
                 <input type="text" id="new-film-title" class="form-input" placeholder="Titre du film">
             </div>
             <div class="form-field">
-                <label class="form-label">Pays</label>
-                <input type="text" id="new-film-country" class="form-input" placeholder="us, fr, jp…">
+                <label class="form-label" for="new-film-country">Pays</label>
+                <input type="text" id="new-film-country" class="form-input" placeholder="Code pays (ex: us, fr, jp)">
             </div>
             <div class="form-field">
-                <label class="form-label">Année</label>
-                <input type="number" id="new-film-year" class="form-input" placeholder="1999">
+                <label class="form-label" for="new-film-year">Année</label>
+                <input type="number" id="new-film-year" class="form-input" placeholder="Année">
             </div>
-            <div class="form-field" style="flex:2;">
-                <label class="form-label">Genre</label>
-                <input type="text" id="new-film-genre" class="form-input" placeholder="Drame, Thriller…">
+            <div class="form-field">
+                <label class="form-label" for="new-film-genre">Genre</label>
+                <input type="text" id="new-film-genre" class="form-input" placeholder="Genre (ex: Drame, Science-fiction)">
             </div>
             <div class="modal-actions">
-                <button id="cancel-add" class="btn-ghost">Annuler</button>
-                <button id="confirm-add" class="btn-confirm">Ajouter</button>
+                <button id="close-add-modal" class="btn-ghost">
+                    <i class="fa-solid fa-xmark"></i> Annuler
+                </button>
+                <button id="confirm-add" class="btn-confirm">
+                    <i class="fa-solid fa-check"></i> Ajouter
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL SUPPRESSION -->
     <div id="confirm-modal" class="modal">
-        <div class="modal-box" style="max-width:340px;">
-            <div class="modal-title" style="font-size:1rem;">Supprimer ce film ?</div>
-            <p style="font-size:0.85rem;color:var(--text-dim);">Cette action est irréversible.</p>
+        <div class="modal-box">
+            <h3 class="modal-title">Supprimer le film</h3>
+            <p>Êtes-vous sûr de vouloir supprimer ce film ?</p>
             <div class="modal-actions">
-                <button id="cancel-delete" class="btn-ghost">Annuler</button>
+                <button id="cancel-delete" class="btn-ghost">
+                    <i class="fa-solid fa-xmark"></i> Annuler
+                </button>
                 <button id="confirm-delete" class="btn-danger">
                     <i class="fa-solid fa-trash"></i> Supprimer
                 </button>
             </div>
         </div>
     </div>
-
-    <!-- FIREBASE -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import { getFirestore, collection, setDoc, deleteDoc, doc, onSnapshot
-      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyB6CCGHq96B6AH2r3Xv3ap8L945axfEEIg",
-        authDomain: "golia-669a0.firebaseapp.com",
-        projectId: "golia-669a0",
-        storageBucket: "golia-669a0.firebasestorage.app",
-        messagingSenderId: "1035355765763",
-        appId: "1:1035355765763:web:a12483699dd05e8e34a236"
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const db  = getFirestore(app);
-      const filmsCol = collection(db, "films");
-
-      window.saveFilmToDb = async (film) => {
-        await setDoc(doc(db, "films", String(film.id)), film);
-      };
-
-      window.deleteFilmFromDb = async (id) => {
-        await deleteDoc(doc(db, "films", String(id)));
-      };
-
-      onSnapshot(filmsCol, (snapshot) => {
-        if (!snapshot.empty) {
-          films = snapshot.docs.map(d => d.data());
-          nextId = Math.max(...films.map(f => f.id)) + 1;
-          render();
-          updateStats();
-        }
-      });
-    </script>
 
     <script>
     // Données initiales
@@ -1149,16 +1159,22 @@ tbody tr:hover .del-btn { opacity: 0.6; }
         render();
     });
 
-    // Aléatoire
+    // Film du jour
     document.getElementById('random-film-btn').addEventListener('click', () => {
-        const pool = films.filter(f=>f.GozzaStatus==='pas-vu'||f.LoliaStatus==='pas-vu');
-        const pick = (pool.length ? pool : films)[Math.floor(Math.random()*(pool.length||films.length))];
-        document.getElementById('suggestion-text').textContent =
-            `Film suggéré : ${pick.title} (${pick.year})${pick.genre ? ' — '+pick.genre : ''}`;
-        document.getElementById('random-film-suggestion').classList.add('show');
+        const filmDuJour = films[Math.floor(Math.random() * films.length)];
+        document.getElementById('film-du-jour-title').textContent = filmDuJour.title;
+        document.getElementById('film-du-jour-year').textContent = filmDuJour.year;
+        document.getElementById('film-du-jour-genre').textContent = filmDuJour.genre;
+        document.getElementById('film-du-jour-country').textContent = formatFlag(filmDuJour.country);
+
+        const filmDuJourElement = document.getElementById('film-du-jour');
+        filmDuJourElement.classList.add('show');
+
+        // Masquer après 5 secondes
+        setTimeout(() => {
+            filmDuJourElement.classList.remove('show');
+        }, 5000);
     });
-    document.getElementById('close-suggestion').addEventListener('click', () =>
-        document.getElementById('random-film-suggestion').classList.remove('show'));
 
     // Ajout
     document.getElementById('add-film-btn').addEventListener('click', () =>
@@ -1188,7 +1204,6 @@ tbody tr:hover .del-btn { opacity: 0.6; }
         };
 
         films.push(newFilm);
-        if (window.saveFilmToDb) window.saveFilmToDb(newFilm);
         document.getElementById('add-film-modal').classList.remove('show');
         document.getElementById('new-film-title').value = '';
         document.getElementById('new-film-country').value = '';
@@ -1205,7 +1220,6 @@ tbody tr:hover .del-btn { opacity: 0.6; }
     }
     document.getElementById('confirm-delete').addEventListener('click', () => {
         if (filmToDelete !== null) {
-            if (window.deleteFilmFromDb) window.deleteFilmFromDb(filmToDelete);
             films = films.filter(f=>f.id!==filmToDelete);
             filmToDelete = null; render(); updateStats();
         }
@@ -1217,12 +1231,28 @@ tbody tr:hover .del-btn { opacity: 0.6; }
     });
 
     function save() {
-        films.forEach(film => { if (window.saveFilmToDb) window.saveFilmToDb(film); });
+        // Sauvegarde des données dans le localStorage
+        localStorage.setItem('films', JSON.stringify(films));
+        localStorage.setItem('nextId', nextId);
+    }
+
+    function load() {
+        // Chargement des données depuis le localStorage
+        const savedFilms = localStorage.getItem('films');
+        const savedNextId = localStorage.getItem('nextId');
+
+        if (savedFilms) {
+            films = JSON.parse(savedFilms);
+            nextId = savedNextId ? parseInt(savedNextId) : Math.max(...films.map(f=>f.id)) + 1;
+        }
     }
 
     // Initialisation
-    render();
-    updateStats();
+    document.addEventListener('DOMContentLoaded', () => {
+        load();
+        render();
+        updateStats();
+    });
     </script>
 </body>
 </html>
