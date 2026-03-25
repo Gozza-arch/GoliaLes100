@@ -551,9 +551,6 @@ tbody tr { animation: fadeIn 0.15s ease-out; }
             <button id="add-film-btn" class="btn">＋ Ajouter un film</button>
         </div>
     </div>
-<button onclick="reimporterFilms()" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:red;color:white;padding:10px;">
-    RÉIMPORTER
-</button>
 
     <!-- FILTRES -->
     <div class="filters-row">
@@ -1101,12 +1098,6 @@ function save() {
   films.forEach(film => {
     if (window.saveFilmToDb) window.saveFilmToDb(film);
   });
-}
-    async function reimporterFilms() {
-    for (const film of films) {
-        await window.saveFilmToDb(film);
-    }
-    alert('Réimport terminé !');
 }
 	function load() {
   // Le chargement est maintenant géré par onSnapshot Firebase
