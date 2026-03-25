@@ -1108,7 +1108,21 @@ function save() {
     }
     alert('Réimport terminé !');
 }
-function load() {
+// IMPORT TEMPORAIRE - À SUPPRIMER APRÈS
+const filmsToImport = [
+  { id: 1, titre: "Le Parrain", ... },
+  // toute ta liste
+];
+
+async function importFilms() {
+  for (const film of filmsToImport) {
+    await setDoc(doc(db, "films", String(film.id)), film);
+  }
+  console.log("Import terminé !");
+}
+importFilms();
+
+	function load() {
   // Le chargement est maintenant géré par onSnapshot Firebase
   // On garde les films par défaut si Firebase n'est pas encore chargé
 }
