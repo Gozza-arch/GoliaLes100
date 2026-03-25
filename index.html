@@ -687,8 +687,8 @@ tbody tr:hover .del-btn { opacity: 0.6; }
     .site-header, .hero, .stats-strip, .main-wrap { padding-left: 16px; padding-right: 16px; }
     .hero-title { font-size: 1.6rem; }
     .table-wrap { overflow-x: auto; }
-}
-    </style>
+    }
+</style>
 </head>
 <body>
     <!-- HEADER -->
@@ -837,37 +837,23 @@ tbody tr:hover .del-btn { opacity: 0.6; }
             <div class="modal-title">Ajouter un film</div>
             <div class="form-field">
                 <label class="form-label">Titre</label>
-                <input type="text" id="new-film-title" class="form-input" placeholder="Le Parrain…">
+                <input type="text" id="new-film-title" class="form-input" placeholder="Titre du film">
             </div>
             <div class="form-field">
                 <label class="form-label">Pays</label>
-                <select id="new-film-country" class="form-input">
-                    <option value="us">🇺🇸 États-Unis</option>
-                    <option value="fr">🇫🇷 France</option>
-                    <option value="jp">🇯🇵 Japon</option>
-                    <option value="gb">🇬🇧 Royaume-Uni</option>
-                    <option value="kr">🇰🇷 Corée</option>
-                    <option value="ru">🇷🇺 Russie</option>
-                    <option value="se">🇸🇪 Suède</option>
-                    <option value="it">🇮🇹 Italie</option>
-                    <option value="de">🇩🇪 Allemagne</option>
-                </select>
+                <input type="text" id="new-film-country" class="form-input" placeholder="us, fr, jp…">
             </div>
             <div class="form-field">
                 <label class="form-label">Année</label>
-                <input type="number" id="new-film-year" class="form-input" placeholder="1972…">
+                <input type="number" id="new-film-year" class="form-input" placeholder="1999">
             </div>
-            <div class="form-field">
+            <div class="form-field" style="flex:2;">
                 <label class="form-label">Genre</label>
                 <input type="text" id="new-film-genre" class="form-input" placeholder="Drame, Thriller…">
             </div>
             <div class="modal-actions">
-                <button id="cancel-add" class="btn-ghost">
-                    <i class="fa-solid fa-xmark"></i> Annuler
-                </button>
-                <button id="confirm-add" class="btn-confirm">
-                    <i class="fa-solid fa-plus"></i> Ajouter
-                </button>
+                <button id="cancel-add" class="btn-ghost">Annuler</button>
+                <button id="confirm-add" class="btn-confirm">Ajouter</button>
             </div>
         </div>
     </div>
@@ -878,9 +864,7 @@ tbody tr:hover .del-btn { opacity: 0.6; }
             <div class="modal-title" style="font-size:1rem;">Supprimer ce film ?</div>
             <p style="font-size:0.85rem;color:var(--text-dim);">Cette action est irréversible.</p>
             <div class="modal-actions">
-                <button id="cancel-delete" class="btn-ghost">
-                    <i class="fa-solid fa-xmark"></i> Annuler
-                </button>
+                <button id="cancel-delete" class="btn-ghost">Annuler</button>
                 <button id="confirm-delete" class="btn-danger">
                     <i class="fa-solid fa-trash"></i> Supprimer
                 </button>
@@ -926,7 +910,7 @@ tbody tr:hover .del-btn { opacity: 0.6; }
     </script>
 
     <script>
-    // ── DONNÉES ──────────────────────────────────────────────────────────────────
+    // Données initiales
     let films = [
         { id:1,  title:"Le Parrain",                        country:"us",    year:1972, genre:"Drame/Crime",           GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
         { id:2,  title:"Taxi Driver",                       country:"us",    year:1976, genre:"Drame/Thriller",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
@@ -935,99 +919,31 @@ tbody tr:hover .del-btn { opacity: 0.6; }
         { id:5,  title:"Le Dernier Tango à Paris",          country:"fr",    year:1972, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
         { id:6,  title:"La Nuit américaine",                country:"fr",    year:1973, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
         { id:7,  title:"Star Wars : Épisode IV",            country:"us",    year:1977, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:8,  title:"Alien, le huitième passager",       country:"us",    year:1979, genre:"Science-fiction/Horreur",GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:9,  title:"Blade Runner",                     country:"us",    year:1982, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:10, title:"2001, l'Odyssée de l'espace",      country:"gb",    year:1968, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:11, title:"Le Cuisinier, le Voleur, sa Femme et son Amant", country:"gb",    year:1989, genre:"Drame/Fantastique", GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:12, title:"Le Sacrifice",                     country:"se",    year:1986, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:13, title:"Le Septième Sceau",                country:"se",    year:1957, genre:"Drame/Fantastique",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:14, title:"Fanny et Alexandre",               country:"se",    year:1982, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:15, title:"Le Festin de Babette",              country:"dk",    year:1987, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:16, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:17, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:18, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:19, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:20, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:21, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:22, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:23, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:24, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:25, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:26, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:27, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:28, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:29, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:30, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:31, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:32, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:33, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:34, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:35, title:"Le Mépris",                        country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:36, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:37, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:38, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:39, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:40, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:41, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:42, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:43, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:44, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:45, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:46, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:47, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:48, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:49, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:50, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:51, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:52, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:53, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:54, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:55, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:56, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:57, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:58, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:59, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:60, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:61, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:62, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:63, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:64, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:65, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:66, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:67, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:68, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:69, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:70, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:71, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:72, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:73, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:74, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:75, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:76, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:77, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:78, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:79, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:80, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:81, title:"American Beauty",                   country:"us",    year:1999, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:82, title:"Fargo",                             country:"us",    year:1996, genre:"Thriller/Comédie noire",GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:83, title:"Le Sixième Sens",                   country:"us",    year:1999, genre:"Thriller/Horreur",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:84, title:"La Ligne verte",                    country:"us",    year:1999, genre:"Drame/Fantastique",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:85, title:"Il faut sauver le soldat Ryan",     country:"us",    year:1998, genre:"Guerre/Drame",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:86, title:"Le Roi Lion",                       country:"us",    year:1994, genre:"Animation/Aventure",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:87, title:"Toy Story",                         country:"us",    year:1995, genre:"Animation/Aventure",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:88, title:"Terminator",                        country:"us",    year:1984, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:89, title:"Matrix",                            country:"us",    year:1999, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:90, title:"Le Silence des Agneaux",            country:"us",    year:1991, genre:"Thriller/Horreur",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:91, title:"Fight Club",                        country:"us",    year:1999, genre:"Drame/Thriller",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:92, title:"Le Pianiste",                        country:"fr",    year:2002, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:93, title:"Le Grand Bleu",                     country:"fr",    year:1988, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:94, title:"Le Cercle des Poètes Disparus",     country:"us",    year:1989, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:95, title:"Forrest Gump",                       country:"us",    year:1994, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:96, title:"Le Diable s'habille en Prada",      country:"us",    year:2006, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:97, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:98, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:99, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
-        { id:100, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 }
+        { id:8,  title:"Alien, le huitième passager",       country:"gb",    year:1979, genre:"Science-fiction/Horreur",GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:9,  title:"Blade Runner",                      country:"us",    year:1982, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:10, title:"Le Sacrifice",                      country:"se",    year:1986, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:11, title:"Le Mépris",                         country:"fr",    year:1963, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:12, title:"Le Fabuleux Destin d'Amélie Poulain", country:"fr",    year:2001, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:13, title:"American Beauty",                    country:"us",    year:1999, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:14, title:"Fargo",                             country:"us",    year:1996, genre:"Thriller/Comédie noire",GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:15, title:"Le Sixième Sens",                    country:"us",    year:1999, genre:"Thriller/Horreur",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:16, title:"La Ligne verte",                    country:"us",    year:1999, genre:"Drame/Fantastique",     GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:17, title:"Il faut sauver le soldat Ryan",     country:"us",    year:1998, genre:"Guerre/Drame",          GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:18, title:"Le Roi Lion",                        country:"us",    year:1994, genre:"Animation/Aventure",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:19, title:"Toy Story",                          country:"us",    year:1995, genre:"Animation/Aventure",    GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:20, title:"Terminator",                         country:"us",    year:1984, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:21, title:"Matrix",                             country:"us",    year:1999, genre:"Science-fiction",       GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:22, title:"Le Silence des Agneaux",            country:"us",    year:1991, genre:"Thriller/Horreur",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:23, title:"Fight Club",                         country:"us",    year:1999, genre:"Drame/Thriller",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:24, title:"Le Pianiste",                        country:"fr",    year:2002, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:25, title:"Le Grand Bleu",                      country:"fr",    year:1988, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:26, title:"Le Cercle des Poètes Disparus",      country:"us",    year:1989, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:27, title:"Forrest Gump",                        country:"us",    year:1994, genre:"Drame",                 GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:28, title:"Le Diable s'habille en Prada",        country:"us",    year:2006, genre:"Comédie/Drame",         GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:29, title:"Les Goonies",                        country:"us",    year:1985, genre:"Aventure/Comédie",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:30, title:"Stand by Me",                        country:"us",    year:1986, genre:"Drame/Aventure",        GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:31, title:"Cinema Paradiso",                    country:"it",    year:1988, genre:"Drame/Romantique",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 },
+        { id:32, title:"Titanic",                            country:"us",    year:1997, genre:"Drame/Romantique",      GozzaStatus:"pas-vu", LoliaStatus:"pas-vu", ratingGozza:0, ratingLolia:0 }
     ];
 
     let sortKey = null, sortDir = 'asc', filmToDelete = null;
@@ -1099,13 +1015,6 @@ tbody tr:hover .del-btn { opacity: 0.6; }
         sel.value = cur;
     }
 
-    function updateStats() {
-        document.getElementById('total-films').textContent = films.length;
-        document.getElementById('watched-Gozza').textContent = films.filter(f => f.GozzaStatus === 'vu').length;
-        document.getElementById('watched-Lolia').textContent = films.filter(f => f.LoliaStatus === 'vu').length;
-        document.getElementById('rewatch-count').textContent = films.filter(f => f.GozzaStatus === 'a-revoir' || f.LoliaStatus === 'a-revoir').length;
-    }
-
     function filterFilms() {
         const search = document.getElementById('search').value.toLowerCase();
         const country = document.getElementById('filter-country').value;
@@ -1168,4 +1077,152 @@ tbody tr:hover .del-btn { opacity: 0.6; }
         document.getElementById('results-count').textContent =
             list.length === films.length
                 ? `${films.length} films`
-                : `${list.length
+                : `${list.length} / ${films.length} films`;
+
+        list.forEach((film, idx) => {
+            const genreTags = (film.genre||'').split('/').map(g =>
+                `<span class="genre-tag">${g.trim()}</span>`).join('');
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${idx + 1}</td>
+                    <td>${film.title}</td>
+                    <td>${formatFlag(film.country)}</td>
+                    <td>${film.year}</td>
+                    <td>${genreTags}</td>
+                    <td>
+                        <button class="status-pill ${STATUS_CLASS[film.GozzaStatus]}"
+                            onclick="toggleStatus(${film.id},'Gozza')">
+                            ${STATUS_LABEL[film.GozzaStatus]} ${STATUS_ICON[film.GozzaStatus]}
+                        </button>
+                    </td>
+                    <td class="stars-cell">
+                        ${renderStars(film.id, 'Gozza', film.ratingGozza)}
+                    </td>
+                    <td>
+                        <button class="status-pill ${STATUS_CLASS[film.LoliaStatus]}"
+                            onclick="toggleStatus(${film.id},'Lolia')">
+                            ${STATUS_LABEL[film.LoliaStatus]} ${STATUS_ICON[film.LoliaStatus]}
+                        </button>
+                    </td>
+                    <td class="stars-cell">
+                        ${renderStars(film.id, 'Lolia', film.ratingLolia)}
+                    </td>
+                    <td>
+                        <button class="del-btn" onclick="confirmDelete(${film.id})"></button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function updateStats() {
+        document.getElementById('total-films').textContent = films.length;
+        document.getElementById('watched-Gozza').textContent = films.filter(f => f.GozzaStatus === 'vu').length;
+        document.getElementById('watched-Lolia').textContent = films.filter(f => f.LoliaStatus === 'vu').length;
+        document.getElementById('rewatch-count').textContent = films.filter(f => f.GozzaStatus === 'a-revoir' || f.LoliaStatus === 'a-revoir').length;
+    }
+
+    // Tri
+    document.querySelectorAll('th.sortable').forEach(th => {
+        th.addEventListener('click', () => {
+            const key = th.dataset.sort;
+            sortDir = (sortKey===key && sortDir==='asc') ? 'desc' : 'asc';
+            sortKey = key;
+            document.querySelectorAll('th.sortable').forEach(t=>t.classList.remove('asc','desc'));
+            th.classList.add(sortDir);
+            render();
+        });
+    });
+
+    // Filtres
+    ['search','filter-country','filter-genre','filter-decade','filter-status']
+        .forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+            document.getElementById(id).addEventListener('change', render);
+        });
+
+    document.getElementById('reset-filters-btn').addEventListener('click', () => {
+        document.getElementById('search').value = '';
+        ['filter-country','filter-genre','filter-decade','filter-status']
+            .forEach(id => { document.getElementById(id).value = ''; });
+        render();
+    });
+
+    // Aléatoire
+    document.getElementById('random-film-btn').addEventListener('click', () => {
+        const pool = films.filter(f=>f.GozzaStatus==='pas-vu'||f.LoliaStatus==='pas-vu');
+        const pick = (pool.length ? pool : films)[Math.floor(Math.random()*(pool.length||films.length))];
+        document.getElementById('suggestion-text').textContent =
+            `Film suggéré : ${pick.title} (${pick.year})${pick.genre ? ' — '+pick.genre : ''}`;
+        document.getElementById('random-film-suggestion').classList.add('show');
+    });
+    document.getElementById('close-suggestion').addEventListener('click', () =>
+        document.getElementById('random-film-suggestion').classList.remove('show'));
+
+    // Ajout
+    document.getElementById('add-film-btn').addEventListener('click', () =>
+        document.getElementById('add-film-modal').classList.add('show'));
+    ['close-add-modal','cancel-add'].forEach(id =>
+        document.getElementById(id).addEventListener('click', () =>
+            document.getElementById('add-film-modal').classList.remove('show')));
+
+    document.getElementById('confirm-add').addEventListener('click', () => {
+        const title = document.getElementById('new-film-title').value.trim();
+        const country = document.getElementById('new-film-country').value.trim();
+        const year = document.getElementById('new-film-year').value.trim();
+        const genre = document.getElementById('new-film-genre').value.trim();
+
+        if (!title) return;
+
+        const newFilm = {
+            id: nextId++,
+            title: title,
+            country: country || 'us',
+            year: year || 1999,
+            genre: genre || 'Drame',
+            GozzaStatus: 'pas-vu',
+            LoliaStatus: 'pas-vu',
+            ratingGozza: 0,
+            ratingLolia: 0
+        };
+
+        films.push(newFilm);
+        if (window.saveFilmToDb) window.saveFilmToDb(newFilm);
+        document.getElementById('add-film-modal').classList.remove('show');
+        document.getElementById('new-film-title').value = '';
+        document.getElementById('new-film-country').value = '';
+        document.getElementById('new-film-year').value = '';
+        document.getElementById('new-film-genre').value = '';
+        render();
+        updateStats();
+    });
+
+    // Suppression
+    function confirmDelete(id) {
+        filmToDelete = id;
+        document.getElementById('confirm-modal').classList.add('show');
+    }
+    document.getElementById('confirm-delete').addEventListener('click', () => {
+        if (filmToDelete !== null) {
+            if (window.deleteFilmFromDb) window.deleteFilmFromDb(filmToDelete);
+            films = films.filter(f=>f.id!==filmToDelete);
+            filmToDelete = null; render(); updateStats();
+        }
+        document.getElementById('confirm-modal').classList.remove('show');
+    });
+    document.getElementById('cancel-delete').addEventListener('click', () => {
+        filmToDelete = null;
+        document.getElementById('confirm-modal').classList.remove('show');
+    });
+
+    function save() {
+        films.forEach(film => { if (window.saveFilmToDb) window.saveFilmToDb(film); });
+    }
+
+    // Initialisation
+    render();
+    updateStats();
+    </script>
+</body>
+</html>
