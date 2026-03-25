@@ -1067,8 +1067,10 @@ document.getElementById('confirm-add').addEventListener('click', () => {
     const year   = parseInt(document.getElementById('new-film-year').value);
     const genre  = document.getElementById('new-film-genre').value.trim();
     if (!title || !year) { alert('Le titre et l\'année sont requis.'); return; }
-    films.push({ id:nextId++, title, country, year, genre:genre||'Non défini',
-        GozzaStatus:'pas-vu', LoliaStatus:'pas-vu', ratingGozza:0, ratingLolia:0 });
+    const newFilm = { id:nextId++, title, country, year, genre:genre||'Non défini',
+    GozzaStatus:'pas-vu', LoliaStatus:'pas-vu', ratingGozza:0, ratingLolia:0 };
+if (window.saveFilmToDb) window.saveFilmToDb(newFilm);
+// Ne pas push manuellement, onSnapshot le fera automatiquement
     document.getElementById('new-film-title').value='';
     document.getElementById('new-film-genre').value='';
     document.getElementById('add-film-modal').classList.remove('show');
@@ -1107,13 +1109,6 @@ function load() {
 
 // ── INIT ─────────────────────────────────────────────────────────────────────
 load(); render(); updateStats();
-// ── IMPORT INITIAL (à supprimer après la première exécution) ──
-setTimeout(() => {
-  if (window.saveFilmToDb) {
-    films.forEach(f => window.saveFilmToDb(f));
-    console.log("Films importés dans Firebase !");
-  }
-}, 2000);
 </script>
 </body>
 </html>
