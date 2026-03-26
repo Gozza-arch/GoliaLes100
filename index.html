@@ -6,19 +6,20 @@
 <title>100 Films Cultes — Lolia éduque Gozza</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Crimson+Pro:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Nunito:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{
-  --ink:#090910;--card:#15151e;--card2:#1c1c28;
+  --ink:#07070f;--card:#13131c;--card2:#1a1a27;
   --gold:#e8b84b;--gold2:#c9922a;
   --green:#2dc653;--red:#e63946;--amber:#f4a426;
-  --muted:#6b6a7a;--paper:#f0ece2;
-  --border:rgba(232,184,75,.18);
-  --r:10px;--rl:16px;
+  --muted:#8a8998;--paper:#f0ece2;
+  --border:rgba(232,184,75,.15);
+  --border2:rgba(255,255,255,.07);
+  --r:10px;--rl:14px;
   --ff-h:'Bebas Neue',sans-serif;
   --ff-b:'DM Sans',sans-serif;
-  --ff-s:'Crimson Pro',serif;
+  --ff-s:'Nunito',sans-serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -41,13 +42,13 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 /* STATS */
 .stats{display:flex;gap:10px;margin:32px 0 22px;flex-wrap:wrap;justify-content:center;}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 28px;text-align:center;flex:1;min-width:120px;max-width:170px;transition:transform .2s,border-color .2s;}
+.stat-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px 24px;text-align:center;flex:1;min-width:110px;max-width:160px;transition:transform .2s,border-color .2s;}
 .stat-card:hover{transform:translateY(-3px);border-color:var(--gold);}
-.stat-num{display:block;font-family:var(--ff-h);font-size:2.8rem;color:var(--gold);line-height:1;}
-.stat-lbl{font-size:.68rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:3px;display:block;}
+.stat-num{display:block;font-family:var(--ff-h);font-size:2.6rem;color:var(--gold);line-height:1;}
+.stat-lbl{font-size:.65rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:4px;display:block;font-weight:600;}
 
 /* TOOLBAR */
-.toolbar{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.toolbar{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:14px 18px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
 .search-w{position:relative;flex:1;min-width:220px;}
 .search-w i{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem;pointer-events:none;}
 .search-w input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:10px 14px 10px 36px;color:var(--paper);font-family:var(--ff-b);font-size:.9rem;outline:none;transition:border-color .2s;}
@@ -69,22 +70,99 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .filters-bar select option{background:var(--card);}
 .f-label{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);}
 
-/* SUGGESTION */
-.suggestion-bar{background:linear-gradient(135deg,rgba(232,184,75,.1),rgba(232,184,75,.04));border:1px solid var(--gold);border-radius:var(--r);padding:13px 18px;margin-bottom:18px;display:none;align-items:center;gap:12px;}
-.suggestion-bar.show{display:flex;}
-#suggestion-text{flex:1;color:var(--gold);font-weight:500;font-size:.92rem;}
-.close-sug{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.3rem;line-height:1;}
-.close-sug:hover{color:var(--red);}
+/* SUGGESTION OVERLAY — SPECTACULAIRE */
+#suggestion-overlay{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(20px);
+  align-items:center;justify-content:center;padding:20px;
+}
+#suggestion-overlay.show{display:flex;animation:sogFadeIn .3s ease;}
+@keyframes sogFadeIn{from{opacity:0}to{opacity:1}}
+
+.sog-box{
+  position:relative;max-width:480px;width:100%;
+  animation:sogPop .4s cubic-bezier(.34,1.3,.64,1);
+  text-align:center;
+}
+@keyframes sogPop{from{opacity:0;transform:scale(.85) translateY(30px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+.sog-label{
+  font-size:.68rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.sog-label::before,.sog-label::after{content:'';flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.sog-label::after{transform:scaleX(-1);}
+
+.sog-poster-wrap{
+  position:relative;width:200px;margin:0 auto 22px;
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.9),0 0 0 2px rgba(232,184,75,.4);
+  aspect-ratio:2/3;background:var(--card);
+  cursor:pointer;transition:transform .2s;
+}
+.sog-poster-wrap:hover{transform:scale(1.03);}
+.sog-poster-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.sog-poster-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.3;background:var(--card2);}
+
+.sog-glow{
+  position:absolute;inset:0;border-radius:16px;pointer-events:none;
+  background:linear-gradient(to top,rgba(232,184,75,.25) 0%,transparent 60%);
+}
+
+.sog-title{
+  font-family:var(--ff-h);font-size:clamp(1.6rem,5vw,2.4rem);
+  color:#fff;line-height:1.1;letter-spacing:.5px;
+  cursor:pointer;display:inline-block;
+  transition:color .2s;margin-bottom:8px;
+}
+.sog-title:hover{color:var(--gold);}
+
+.sog-meta{
+  font-size:.8rem;color:var(--muted);margin-bottom:6px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.sog-genre{
+  display:inline-block;background:rgba(232,184,75,.12);color:var(--gold);
+  border:1px solid rgba(232,184,75,.3);border-radius:20px;
+  padding:4px 14px;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.sog-actions{display:flex;gap:10px;justify-content:center;}
+.sog-btn-open{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--ink);
+  border:none;padding:12px 28px;border-radius:10px;cursor:pointer;
+  font-family:var(--ff-b);font-weight:800;font-size:.88rem;
+  display:flex;align-items:center;gap:8px;
+  transition:all .2s;
+}
+.sog-btn-open:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,184,75,.45);}
+.sog-btn-reroll{
+  background:rgba(255,255,255,.08);color:var(--paper);
+  border:1px solid rgba(255,255,255,.15);padding:12px 20px;border-radius:10px;cursor:pointer;
+  font-family:var(--ff-b);font-weight:700;font-size:.88rem;
+  display:flex;align-items:center;gap:8px;
+  transition:all .2s;
+}
+.sog-btn-reroll:hover{background:rgba(255,255,255,.14);}
+.sog-close{
+  position:absolute;top:-14px;right:-14px;
+  background:rgba(30,30,45,.9);border:1px solid rgba(255,255,255,.15);
+  border-radius:50%;color:#fff;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;cursor:pointer;transition:all .2s;
+}
+.sog-close:hover{background:var(--red);border-color:var(--red);transform:rotate(90deg);}
 .results-info{font-size:.74rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
 
 /* GRID — GRANDES AFFICHES */
-#grid-view{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px;}
+#grid-view{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px;}
 
 .film-card{position:relative;border-radius:var(--rl);cursor:pointer;transition:transform .28s cubic-bezier(.34,1.4,.64,1);}
-.film-card:hover{transform:translateY(-10px) scale(1.02);z-index:5;}
-.film-card:hover .poster-wrap{box-shadow:0 28px 60px rgba(0,0,0,.85),0 0 0 2px var(--gold);}
+.film-card:hover{transform:translateY(-8px) scale(1.02);z-index:5;}
+.film-card:hover .poster-wrap{box-shadow:0 24px 50px rgba(0,0,0,.85),0 0 0 2px var(--gold);}
 
-.poster-wrap{position:relative;border-radius:var(--rl);overflow:hidden;aspect-ratio:2/3;background:var(--card);border:1px solid var(--border);box-shadow:0 10px 32px rgba(0,0,0,.6);transition:box-shadow .28s;}
+.poster-wrap{position:relative;border-radius:var(--rl);overflow:hidden;aspect-ratio:2/3;background:var(--card);border:1px solid var(--border2);box-shadow:0 8px 24px rgba(0,0,0,.55);transition:box-shadow .28s;}
 .poster-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
 .film-card:hover .poster-wrap img{transform:scale(1.04);}
 
@@ -112,30 +190,59 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .film-card:hover .card-del{opacity:1;}
 .card-del:hover{background:var(--red);color:#fff;}
 
-/* STATUS BUTTONS — GRANDS ET VISIBLES */
-.card-status-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 2px 4px;}
+/* STATUS BADGES — PILLS SUR L'AFFICHE */
+.card-ratings{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:5px;z-index:4;}
+
+/* Nouveau design : badge compact avec initiale + icône colorée */
 .csb-btn{
-  padding:11px 4px;border-radius:11px;border:2px solid transparent;
-  cursor:pointer;font-family:var(--ff-b);
-  text-transform:uppercase;letter-spacing:.3px;
+  display:flex;align-items:center;gap:5px;
+  padding:5px 9px 5px 7px;
+  border-radius:20px;border:1.5px solid transparent;
+  cursor:pointer;font-family:var(--ff-b);font-weight:700;
+  font-size:.68rem;letter-spacing:.3px;
   transition:all .18s;
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  line-height:1.2;
+  backdrop-filter:blur(8px);
+  text-transform:uppercase;
+  line-height:1;
 }
-.csb-btn .csb-who{font-size:.56rem;letter-spacing:1.5px;opacity:.75;font-weight:700;}
-.csb-btn .csb-icon{font-size:1.2rem;}
-.csb-btn .csb-label{font-size:.74rem;font-weight:800;}
+.csb-btn .csb-who{
+  width:16px;height:16px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:800;flex-shrink:0;
+}
+.csb-btn .csb-icon{font-size:.8rem;line-height:1;}
+.csb-btn .csb-label{font-size:.65rem;font-weight:700;}
 
-.csb-btn.vu{background:rgba(45,198,83,.18);color:#3de065;border-color:rgba(45,198,83,.5);box-shadow:0 2px 12px rgba(45,198,83,.1);}
-.csb-btn.vu:hover{background:rgba(45,198,83,.9);color:#fff;border-color:transparent;box-shadow:0 4px 18px rgba(45,198,83,.4);transform:translateY(-1px);}
-.csb-btn.pas-vu{background:rgba(230,57,70,.18);color:#f06070;border-color:rgba(230,57,70,.5);box-shadow:0 2px 12px rgba(230,57,70,.1);}
-.csb-btn.pas-vu:hover{background:rgba(230,57,70,.9);color:#fff;border-color:transparent;box-shadow:0 4px 18px rgba(230,57,70,.4);transform:translateY(-1px);}
-.csb-btn.a-revoir{background:rgba(244,164,38,.18);color:#f4a426;border-color:rgba(244,164,38,.5);box-shadow:0 2px 12px rgba(244,164,38,.1);}
-.csb-btn.a-revoir:hover{background:rgba(244,164,38,.9);color:var(--ink);border-color:transparent;box-shadow:0 4px 18px rgba(244,164,38,.4);transform:translateY(-1px);}
+/* Vu — vert */
+.csb-btn.vu{
+  background:rgba(30,160,70,.85);color:#fff;
+  border-color:rgba(60,210,100,.4);
+  box-shadow:0 2px 10px rgba(30,160,70,.4);
+}
+.csb-btn.vu:hover{background:rgba(30,180,75,1);box-shadow:0 4px 16px rgba(30,160,70,.6);transform:translateX(2px);}
+.csb-btn.vu .csb-who{background:rgba(255,255,255,.2);color:#fff;}
 
-.card-foot{padding:5px 2px 0;cursor:pointer;}
-.cf-title{font-size:.88rem;font-weight:700;color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;}
-.cf-meta{font-size:.72rem;color:var(--muted);margin-top:2px;}
+/* Pas vu — gris discret */
+.csb-btn.pas-vu{
+  background:rgba(20,20,35,.78);color:rgba(255,255,255,.55);
+  border-color:rgba(255,255,255,.12);
+}
+.csb-btn.pas-vu:hover{background:rgba(40,40,60,.9);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.25);}
+.csb-btn.pas-vu .csb-who{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);}
+
+/* À revoir — ambre */
+.csb-btn.a-revoir{
+  background:rgba(200,130,20,.85);color:#fff;
+  border-color:rgba(244,164,38,.4);
+  box-shadow:0 2px 10px rgba(200,130,20,.4);
+}
+.csb-btn.a-revoir:hover{background:rgba(220,145,25,1);box-shadow:0 4px 16px rgba(200,130,20,.5);transform:translateX(2px);}
+.csb-btn.a-revoir .csb-who{background:rgba(255,255,255,.2);color:#fff;}
+
+.card-foot{padding:8px 4px 2px;cursor:pointer;}
+.cf-title{font-size:.88rem;font-weight:700;color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;letter-spacing:.01em;}
+.cf-meta{font-size:.7rem;color:var(--muted);margin-top:3px;display:flex;align-items:center;gap:5px;}
+.cf-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--muted);opacity:.5;display:inline-block;}
 
 /* FILM DETAIL POP-UP */
 #fdm{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.88);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:16px;}
@@ -167,7 +274,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .fdm-section-title{font-family:var(--ff-h);font-size:.95rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
 .fdm-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 
-.fdm-synopsis{font-family:var(--ff-s);font-style:italic;font-size:1.12rem;color:rgba(240,236,226,.82);line-height:1.82;padding:18px 20px;background:rgba(232,184,75,.04);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;}
+.fdm-synopsis{font-family:var(--ff-s);font-style:normal;font-size:1rem;font-weight:400;color:rgba(240,236,226,.88);line-height:1.78;padding:18px 22px;background:rgba(255,255,255,.04);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;letter-spacing:.01em;}
 .fdm-synopsis.empty{font-style:normal;font-size:.9rem;color:var(--muted);}
 
 /* Person blocks in modal */
@@ -315,9 +422,23 @@ tbody tr:last-child td{border-bottom:none;}
   <button class="btn btn-ghost" id="reset-btn" style="padding:8px 14px;font-size:.8rem;"><i class="fa fa-times"></i> Reset</button>
 </div>
 
-<div id="suggestion-bar" class="suggestion-bar">
-  <span>🎲</span><span id="suggestion-text"></span>
-  <button class="close-sug" id="close-sug">&times;</button>
+<!-- SUGGESTION OVERLAY -->
+<div id="suggestion-overlay">
+  <div class="sog-box">
+    <button class="sog-close" id="sog-close"><i class="fa fa-times"></i></button>
+    <div class="sog-label">🎲 Film du hasard</div>
+    <div class="sog-poster-wrap" id="sog-poster" onclick="sogOpen()">
+      <div class="sog-poster-ph">🎬</div>
+      <div class="sog-glow"></div>
+    </div>
+    <div class="sog-title" id="sog-title" onclick="sogOpen()"></div>
+    <div class="sog-meta" id="sog-meta"></div>
+    <div class="sog-genre" id="sog-genre"></div>
+    <div class="sog-actions">
+      <button class="sog-btn-open" onclick="sogOpen()"><i class="fa fa-circle-play"></i> Voir la fiche</button>
+      <button class="sog-btn-reroll" id="sog-reroll"><i class="fa fa-dice"></i> Autre film</button>
+    </div>
+  </div>
 </div>
 <div class="results-info" id="results-count"></div>
 
@@ -415,36 +536,130 @@ const cfg={apiKey:"AIzaSyB6CCGHq96B6AH2r3Xv3ap8L945axfEEIg",authDomain:"golia-66
 const app=initializeApp(cfg);const db=getFirestore(app);const col=collection(db,"films");
 window.saveFilmToDb=async f=>await setDoc(doc(db,"films",String(f.id)),f);
 window.deleteFilmFromDb=async id=>await deleteDoc(doc(db,"films",String(id)));
-onSnapshot(col,snap=>{if(!snap.empty){films=snap.docs.map(d=>d.data());nextId=Math.max(...films.map(f=>f.id))+1;render();updateStats();}});
+onSnapshot(col,snap=>{if(!snap.empty){films=snap.docs.map(d=>{const x=d.data();x.id=Number(x.id);return x;});nextId=Math.max(...films.map(f=>f.id))+1;render();updateStats();}});
 </script>
 
 <script>
 const TK='2dca580c2a14b55200e784d157207b4d';
 const TW='https://image.tmdb.org/t/p/w342';
 const TBG='https://image.tmdb.org/t/p/w780';
-const pC={},sC={},bC={};
+const pC={},sC={},bC={},tC={};
+
+// Clé de cache stable basée sur titre+année (immunise contre les IDs instables de Firestore)
+function cacheKey(f){ return `${f.title}__${f.year}`; }
+
+// File de fetch pour éviter de surcharger l'API
+const fetchQueue = [];
+let fetchRunning = 0;
+const FETCH_CONCURRENCY = 4;
+
+function enqueueFetch(f) {
+  const k = cacheKey(f);
+  if (pC[k] !== undefined) return;
+  pC[k] = null; sC[k] = ''; bC[k] = null;
+  fetchQueue.push(f);
+  drainQueue();
+}
+
+function drainQueue() {
+  while (fetchRunning < FETCH_CONCURRENCY && fetchQueue.length > 0) {
+    const f = fetchQueue.shift();
+    fetchRunning++;
+    fetchTMDB(f).finally(() => { fetchRunning--; drainQueue(); });
+  }
+}
 
 async function fetchTMDB(f) {
-  if (pC[f.id] !== undefined) return;
-  pC[f.id] = null;
-  sC[f.id] = '';
-  bC[f.id] = null;
+  const k = cacheKey(f);
+  const BASE_SEARCH = 'https://api.themoviedb.org/3/search/movie';
+  const BASE_MOVIE  = 'https://api.themoviedb.org/3/movie';
 
   try {
-    const q = encodeURIComponent(f.title);
-    const r = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TK}&query=${q}&year=${f.year}&language=fr-FR`);
-    const d = await r.json();
+    let tmdbId = f.tmdbId || null;
 
-    const hit = (d.results || []).find(x => x.poster_path);
+    // ── CAS 1 : on connaît déjà l'ID TMDB → fetch direct, zéro ambiguïté ──
+    if (tmdbId) {
+      const r = await fetch(`${BASE_MOVIE}/${tmdbId}?api_key=${TK}&language=fr-FR`);
+      if (r.ok) {
+        const d = await r.json();
+        pC[k] = d.poster_path  ? TW  + d.poster_path  : null;
+        bC[k] = d.backdrop_path ? TBG + d.backdrop_path : null;
+        sC[k] = d.overview || '';
+        // Synopsis vide en FR → re-fetch en EN
+        if (!sC[k]) {
+          const re = await fetch(`${BASE_MOVIE}/${tmdbId}?api_key=${TK}&language=en-US`);
+          if (re.ok) { const de = await re.json(); sC[k] = de.overview || ''; }
+        }
+        updateCard(f.id);
+        return;
+      }
+    }
+
+    // ── CAS 2 : pas d'ID connu → recherche par titre, puis on stocke l'ID ──
+    const trySearch = async (title, lang, withYear) => {
+      const q = encodeURIComponent(title);
+      let url = `${BASE_SEARCH}?api_key=${TK}&query=${q}&language=${lang}&include_adult=false`;
+      if (withYear) url += `&year=${f.year}`;
+      const r = await fetch(url);
+      if (!r.ok) return null;
+      const d = await r.json();
+      return (d.results || []).find(x => x.poster_path) || null;
+    };
+
+    let hit = await trySearch(f.title, 'fr-FR', true)
+           || await trySearch(f.title, 'fr-FR', false)
+           || await trySearch(f.title, 'en-US', true)
+           || await trySearch(f.title, 'en-US', false);
+
+    // Fallback : recherche sans filtre pour récupérer l'original_title
+    if (!hit) {
+      const r = await fetch(`${BASE_SEARCH}?api_key=${TK}&query=${encodeURIComponent(f.title)}&include_adult=false`);
+      if (r.ok) {
+        const d = await r.json();
+        const candidate = (d.results || [])[0];
+        if (candidate?.original_title && candidate.original_title !== f.title) {
+          hit = await trySearch(candidate.original_title, 'fr-FR', false)
+             || await trySearch(candidate.original_title, 'en-US', false);
+          if (hit) tC[k] = candidate.original_title;
+        }
+      }
+    }
+
     if (hit) {
-      pC[f.id] = TW + hit.poster_path;
-      sC[f.id] = hit.overview || '';
-      if (hit.backdrop_path) bC[f.id] = TBG + hit.backdrop_path;
+      tmdbId = hit.id;
+      pC[k] = TW  + hit.poster_path;
+      bC[k] = hit.backdrop_path ? TBG + hit.backdrop_path : null;
+      sC[k] = hit.overview || '';
+
+      // Synopsis vide en FR → re-fetch détail en EN
+      if (!sC[k]) {
+        const re = await fetch(`${BASE_MOVIE}/${tmdbId}?api_key=${TK}&language=en-US`);
+        if (re.ok) { const de = await re.json(); sC[k] = de.overview || ''; }
+      }
+
+      // ── Sauvegarde l'ID TMDB dans Firebase pour les prochains chargements ──
+      if (tmdbId && window.saveFilmToDb) {
+        const film = films.find(x => x.id == f.id);
+        if (film && !film.tmdbId) {
+          film.tmdbId = tmdbId;
+          window.saveFilmToDb(film);
+        }
+      }
     }
 
     updateCard(f.id);
-  } catch (e) {
-    console.error("Erreur lors de la récupération des données TMDB:", e);
+
+  } catch(e) {
+    // Retry silencieux après 3s
+    setTimeout(async () => {
+      try {
+        const r = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TK}&query=${encodeURIComponent(f.title)}&language=fr-FR`);
+        const d = await r.json();
+        const hit = (d.results||[]).find(x=>x.poster_path);
+        if (hit) { const k2=cacheKey(f); pC[k2]=TW+hit.poster_path; sC[k2]=hit.overview||''; if(hit.backdrop_path) bC[k2]=TBG+hit.backdrop_path; }
+        updateCard(f.id);
+      } catch(e2) {}
+    }, 3000);
   }
 }
 let films=[
@@ -526,7 +741,7 @@ let films=[
   {id:76,title:"There Will Be Blood",country:"us",year:2007,genre:"Drame",GozzaStatus:"pas-vu",LoliaStatus:"pas-vu",ratingGozza:0,ratingLolia:0},
   {id:77,title:"Les Fils de l'homme",country:"gb",year:2006,genre:"Science-fiction",GozzaStatus:"pas-vu",LoliaStatus:"pas-vu",ratingGozza:0,ratingLolia:0},
   {id:78,title:"Les Infiltrés",country:"us",year:2006,genre:"Thriller/Crime",GozzaStatus:"pas-vu",LoliaStatus:"pas-vu",ratingGozza:0,ratingLolia:0},
-  {id:79,title:"Perdus dans la traduction",country:"us",year:2003,genre:"Comédie/Drame",GozzaStatus:"pas-vu",LoliaStatus:"pas-vu",ratingGozza:0,ratingLolia:0},
+  {id:79,title:"Lost in Translation",country:"us",year:2003,genre:"Comédie/Drame",GozzaStatus:"pas-vu",LoliaStatus:"pas-vu",ratingGozza:0,ratingLolia:0},
   {id:80,title:"La Famille Tenenbaum",country:"us",year:2001,genre:"Comédie/Drame",GozzaStatus:"pas-vu",LoliaStatus:"pas-vu",ratingGozza:0,ratingLolia:0},
   {id:81,title:"American Beauty",country:"us",year:1999,genre:"Drame",GozzaStatus:"pas-vu",LoliaStatus:"pas-vu",ratingGozza:0,ratingLolia:0},
   {id:82,title:"Fargo",country:"us",year:1996,genre:"Thriller/Comédie noire",GozzaStatus:"pas-vu",LoliaStatus:"pas-vu",ratingGozza:0,ratingLolia:0},
@@ -586,22 +801,26 @@ function rsS(el,r){el.parentElement.querySelectorAll('span').forEach((s,i)=>s.st
 function updateCard(id){
   const el=document.querySelector(`[data-id="${id}"]`);if(!el)return;
   const pw=el.querySelector('.poster-wrap');if(!pw)return;
+  const f=films.find(x=>x.id==id);if(!f)return;
+  const k=cacheKey(f);
+  const displayTitle = tC[k] || f.title;
   const hint=`<div class="poster-hint"><span><i class="fa fa-circle-play"></i> Voir les détails</span></div>`;
-  if(pC[id]){pw.innerHTML=`<img src="${pC[id]}" alt="" loading="lazy">${hint}`;}
-  else if(pC[id]===null){const f=films.find(x=>x.id===id);pw.innerHTML=`<div class="poster-placeholder"><div class="ph-icon">🎬</div><div class="ph-title">${f?.title||''}</div><div class="ph-year">${f?.year||''}</div></div>${hint}`;}
+  if(pC[k]){pw.innerHTML=`<img src="${pC[k]}" alt="${displayTitle}" loading="lazy">${hint}`;}
+  else{pw.innerHTML=`<div class="poster-placeholder"><div class="ph-icon">🎬</div><div class="ph-title">${displayTitle}</div><div class="ph-year">${f.year}</div></div>${hint}`;}
 }
 
 /* DETAIL MODAL */
 function openDetail(id){
-  const f=films.find(x=>x.id===id);if(!f)return;
+  const f=films.find(x=>x.id==id);if(!f)return;
+  const k=cacheKey(f);
   // BG
   const bgEl=document.getElementById('fdm-bg');
-  const bgSrc=bC[id]||pC[id];
+  const bgSrc=bC[k]||pC[k];
   if(bgSrc){bgEl.outerHTML=`<img id="fdm-bg" class="fdm-bg" src="${bgSrc}" alt="">`;}
   else{bgEl.outerHTML=`<div id="fdm-bg" class="fdm-bg-ph"></div>`;}
   // Poster
   const pEl=document.getElementById('fdm-poster');
-  pEl.innerHTML=pC[id]?`<img src="${pC[id]}" alt="">`:`<div class="fdm-poster-ph">🎬</div>`;
+  pEl.innerHTML=pC[k]?`<img src="${pC[k]}" alt="">`:`<div class="fdm-poster-ph">🎬</div>`;
   // Info
   document.getElementById('fdm-tag').textContent=f.genre||'';
   document.getElementById('fdm-title').textContent=f.title;
@@ -611,7 +830,7 @@ function openDetail(id){
     <div class="fdm-meta-item"><i class="fa fa-film"></i>${f.genre||'—'}</div>`;
   // Synopsis
   const syn=document.getElementById('fdm-synopsis');
-  const txt=sC[id];
+  const txt=sC[k];
   if(txt){syn.textContent=txt;syn.className='fdm-synopsis';}
   else{syn.textContent='Aucun synopsis disponible pour ce film.';syn.className='fdm-synopsis empty';}
   // Persons
@@ -702,20 +921,16 @@ function render(){
     const card = document.createElement('div');
     card.className = 'film-card';
     card.dataset.filmId = film.id;
-
-    // Ajout d'un identifiant visible pour le débogage
-    card.innerHTML = `
-      <div class="card-debug-id">ID: ${film.id}</div>
-      <!-- Reste du contenu de la carte -->
-    `;
+    card.dataset.id = film.id;
 
     // Contenu de l'affiche
     let posterContent = '';
+    const ck = cacheKey(film);
 
-    if (pC[film.id]) {
-      posterContent = `<img src="${pC[film.id]}" alt="${film.title}" loading="lazy">
+    if (pC[ck]) {
+      posterContent = `<img src="${pC[ck]}" alt="${film.title}" loading="lazy">
         <div class="poster-hint"><span><i class="fa fa-circle-play"></i> Voir les détails</span></div>`;
-    } else if (pC[film.id] === null) {
+    } else if (pC[ck] === null) {
       posterContent = `<div class="poster-placeholder">
         <div class="ph-icon">🎬</div>
         <div class="ph-title">${film.title}</div>
@@ -726,20 +941,21 @@ function render(){
       posterContent = `<div class="poster-loading">
         <div class="spinner"></div>
       </div>`;
-      fetchTMDB(film);
+      enqueueFetch(film);
     }
+
+    // Initiales pour les badges
+    const gI = 'G', lI = 'L';
 
     // Contenu des boutons de statut
     const statusButtons = `
       <div class="card-ratings">
-        <button class="csb-btn ${film.GozzaStatus}" onclick="toggleStatus(${film.id},'Gozza',event)">
-          <span class="csb-who">Gozza</span>
-          <span class="csb-icon">${ico[film.GozzaStatus]}</span>
+        <button class="csb-btn ${film.GozzaStatus}" onclick="toggleStatus(${film.id},'Gozza',event)" title="Gozza : ${SL[film.GozzaStatus]}">
+          <span class="csb-who">${gI}</span>
           <span class="csb-label">${SL[film.GozzaStatus]}</span>
         </button>
-        <button class="csb-btn ${film.LoliaStatus}" onclick="toggleStatus(${film.id},'Lolia',event)">
-          <span class="csb-who">Lolia</span>
-          <span class="csb-icon">${ico[film.LoliaStatus]}</span>
+        <button class="csb-btn ${film.LoliaStatus}" onclick="toggleStatus(${film.id},'Lolia',event)" title="Lolia : ${SL[film.LoliaStatus]}">
+          <span class="csb-who">${lI}</span>
           <span class="csb-label">${SL[film.LoliaStatus]}</span>
         </button>
       </div>`;
@@ -748,10 +964,10 @@ function render(){
     const cardFoot = `
       <div class="card-foot" onclick="openDetail(${film.id})">
         <div class="cf-title">${film.title}</div>
-        <div class="cf-meta">${film.year} · ${flags(film.country)}</div>
+        <div class="cf-meta">${film.year}<span class="cf-meta-dot"></span>${flags(film.country)}</div>
       </div>`;
 
-    // Assemblage final
+    // Assemblage final (une seule fois, plus de bug de double innerHTML)
     card.innerHTML = `
       <div class="poster-wrap">
         ${posterContent}
@@ -832,13 +1048,58 @@ document.getElementById('reset-btn').addEventListener('click',()=>{
   ['filter-country','filter-genre','filter-decade','filter-status'].forEach(id=>document.getElementById(id).value='');
   render();
 });
-document.getElementById('random-btn').addEventListener('click',()=>{
-  const pool=films.filter(f=>f.GozzaStatus==='pas-vu'||f.LoliaStatus==='pas-vu');
-  const pick=(pool.length?pool:films)[Math.floor(Math.random()*(pool.length||films.length))];
-  document.getElementById('suggestion-text').textContent=`Film suggéré : ${pick.title} (${pick.year})${pick.genre?' — '+pick.genre:''}`;
-  document.getElementById('suggestion-bar').classList.add('show');
-});
-document.getElementById('close-sug').addEventListener('click',()=>document.getElementById('suggestion-bar').classList.remove('show'));
+let sogPick = null;
+
+function pickRandom() {
+  const pool = films.filter(f => f.GozzaStatus === 'pas-vu' || f.LoliaStatus === 'pas-vu');
+  return (pool.length ? pool : films)[Math.floor(Math.random() * (pool.length || films.length))];
+}
+
+function showSuggestion(pick) {
+  sogPick = pick;
+  const k = cacheKey(pick);
+  // Poster
+  const pw = document.getElementById('sog-poster');
+  if (pC[k]) {
+    pw.innerHTML = `<img src="${pC[k]}" alt="${pick.title}"><div class="sog-glow"></div>`;
+  } else {
+    pw.innerHTML = `<div class="sog-poster-ph">🎬</div><div class="sog-glow"></div>`;
+    // Tente de charger l'affiche si pas encore en cache
+    if (pC[k] === undefined) {
+      enqueueFetch(pick);
+      // Polling léger pour mettre à jour l'affiche dans l'overlay
+      const interval = setInterval(() => {
+        if (pC[k]) {
+          pw.innerHTML = `<img src="${pC[k]}" alt="${pick.title}"><div class="sog-glow"></div>`;
+          clearInterval(interval);
+        }
+      }, 400);
+      setTimeout(() => clearInterval(interval), 8000);
+    }
+  }
+  document.getElementById('sog-title').textContent = tC[k] || pick.title;
+  document.getElementById('sog-meta').innerHTML = `<span>${pick.year}</span><span>·</span><span>${flags(pick.country)}</span>`;
+  document.getElementById('sog-genre').textContent = pick.genre || '';
+  document.getElementById('suggestion-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function sogOpen() {
+  if (!sogPick) return;
+  document.getElementById('suggestion-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+  openDetail(sogPick.id);
+}
+
+function closeSog() {
+  document.getElementById('suggestion-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('random-btn').addEventListener('click', () => showSuggestion(pickRandom()));
+document.getElementById('sog-close').addEventListener('click', closeSog);
+document.getElementById('sog-reroll').addEventListener('click', () => showSuggestion(pickRandom()));
+document.getElementById('suggestion-overlay').addEventListener('click', e => { if (e.target === document.getElementById('suggestion-overlay')) closeSog(); });
 document.getElementById('add-film-btn').addEventListener('click',()=>document.getElementById('add-modal').classList.add('show'));
 ['close-add','cancel-add'].forEach(id=>document.getElementById(id).addEventListener('click',()=>document.getElementById('add-modal').classList.remove('show')));
 document.getElementById('confirm-add').addEventListener('click',()=>{
