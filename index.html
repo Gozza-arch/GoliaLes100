@@ -536,7 +536,37 @@ const cfg={apiKey:"AIzaSyB6CCGHq96B6AH2r3Xv3ap8L945axfEEIg",authDomain:"golia-66
 const app=initializeApp(cfg);const db=getFirestore(app);const col=collection(db,"films");
 window.saveFilmToDb=async f=>await setDoc(doc(db,"films",String(f.id)),f);
 window.deleteFilmFromDb=async id=>await deleteDoc(doc(db,"films",String(id)));
-onSnapshot(col,snap=>{if(!snap.empty){films=snap.docs.map(d=>{const x=d.data();x.id=Number(x.id);return x;});nextId=Math.max(...films.map(f=>f.id))+1;render();updateStats();}});
+onSnapshot(col, (snap) => {
+  if (!snap.empty) {
+    const allFilms = snap.docs.map(d => d.data());
+    const uniqueTitles = new Set();
+    const duplicates = [];
+
+    allFilms.forEach(film => {
+      if (uniqueTitles.has(film.title)) {
+        duplicates.push(film);
+      } else {
+        uniqueTitles.add(film.title);
+      }
+    });
+
+    if (duplicates.length > 0) {
+      console.error("Doublons détectés dans Firebase:", duplicates);
+    }
+
+    films = allFilms.map(x => {
+      const newFilm = {...x};
+      newFilm.id = Number(x.id);
+      return newFilm;
+    });
+
+    nextId = Math.max(...films.map(f => f.id)) + 1;
+    render();
+    updateStats();
+  }
+});
+
+  
 </script>
 
 <script>
