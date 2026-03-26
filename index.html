@@ -364,8 +364,38 @@ tbody tr:last-child td{border-bottom:none;}
 }
 }
 </style>
+  // A SUPPRIMER
 </head>
 <body>
+  <script>async function cleanDuplicates() {
+  const snapshot = await getDocs(col);
+  const allFilms = snapshot.docs.map(d => d.data());
+  const uniqueTitles = new Map();
+
+  allFilms.forEach(film => {
+    if (!uniqueTitles.has(film.title)) {
+      uniqueTitles.set(film.title, film);
+    }
+  });
+
+  // Supprimer les doublons
+  for (const [title, film] of uniqueTitles) {
+    const querySnapshot = await getDocs(query(col, where("title", "==", title)));
+    if (querySnapshot.docs.length > 1) {
+      console.log(`Suppression des doublons pour ${title}`);
+      querySnapshot.docs.forEach(doc => {
+        if (doc.id !== film.id.toString()) {
+          deleteDoc(doc.ref);
+        }
+      });
+    }
+  }
+
+  console.log("Nettoyage terminé");
+}
+
+// Exécuter le nettoyage
+cleanDuplicates();</script>
 <div class="wrap">
 
 <header class="site-header">
