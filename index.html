@@ -1120,7 +1120,11 @@ document.getElementById('confirm-del').addEventListener('click',()=>{
 });
 document.getElementById('cancel-del').addEventListener('click',()=>{filmToDelete=null;document.getElementById('del-modal').classList.remove('show');});
 function save(){films.forEach(f=>{if(window.saveFilmToDb)window.saveFilmToDb(f);});}
-
+// Ajoutez ce code temporairement pour exporter les données
+function exportData() {
+  console.log(JSON.stringify(films, null, 2));
+}
+exportData();
 render();updateStats();setView('grid');
 </script>
 </body>
